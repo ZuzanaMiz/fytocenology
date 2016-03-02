@@ -1,0 +1,38 @@
+<template name ="area_list">
+<ul class="nav nav-pills">
+  <li role="presentation" ><a href="/">Home</a></li>
+  <li role="presentation" class="active"><a href="/ZoznamOblasti">Zoznam oblastí</a></li>
+  <li role="presentation" ><a href="/pridajOblast">Pridaj oblasť</a></li>
+  <li role="presentation" ><a href="/nastavenia">Nastavenia</a></li>
+</ul>
+<br>
+ <label class = "onlyMy">
+    <input type="checkbox" checked="{{onlyMyActual}}">
+    Moje oblasti 
+  </label>
+<form>
+ 
+
+  <input type ="textField" value= "Zadaj nazov obce">
+  
+  <button type="button" class="btn btn-default search" aria-label="Left Align">
+     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+  </button>
+</form>
+
+
+//filter nadmorskej vysky ?<br>
+//hladat podla nazvu  <br>
+
+ 
+
+  <div class = "containter">
+  <ul class="list-group">
+
+   {{#each areas}}
+       {{>area}}
+   {{/each}}
+  </ul>
+  </div>
+
+ </template>

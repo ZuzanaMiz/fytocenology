@@ -1,0 +1,22 @@
+<template name ="editArea">
+<ul class="nav nav-pills">
+  <li role="presentation" ><a href="/">Home</a></li>
+  <li role="presentation" class="active"><a href="/ZoznamOblasti">Zoznam oblastí</a></li>
+  <li role="presentation" ><a href="/pridajOblast">Pridaj oblasť</a></li>
+  <li role="presentation" ><a href="/nastavenia">Nastavenia</a></li>
+
+</ul>
+
+{{>infoArea}}
+{{>reportList}}
+
+
+       {{#if wantAdd 'no'}}
+        {{> changeButton}}
+        {{else}}
+        {{> addReport}}
+        {{/if}}
+
+
+</template>
+

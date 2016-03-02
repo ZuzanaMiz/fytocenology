@@ -1,0 +1,109 @@
+
+<template name = "addArea">
+<ul class="nav nav-pills">
+  <li role="presentation" ><a href="/">Home</a></li>
+  <li role="presentation"><a href="/ZoznamOblasti">Zoznam oblastí</a></li>
+  <li role="presentation" class="active"><a href="/pridajOblast">Pridaj oblasť</a></li>
+  <li role="presentation" ><a href="/nastavenia">Nastavenia</a></li>
+
+
+</ul>
+  <div class = "containter">
+    <div class="panel panel-primary">
+      <div class="panel-heading"> Zadanie novej oblasti </div>
+        <div class="panel-body">                            
+          <form  class = "new-area form-vertical">
+            <div class="form-group">
+                <label for = "name" class = "col-sm-2"> Nazov obce </label>
+                <div class="col-sm-10">
+                  <input type = "text" name ="place" class = "input - input default" required/>
+                </div>
+              </div>
+                 <div class="form-group">
+              <label for = "description" class = "col-sm-2"> Popis miesta </label>
+                 <div class="col-sm-10">
+              <textarea name ="description" rows = "10" cols = "30" class = "form-control" > </textarea>
+             </div>
+            </div>
+            
+            <div class="form-group">
+              <label for = "gps1" class = "col-sm-2"> Suradnica 1</label>
+              <div class="col-sm-10">
+                <input type = "number" name = "gps1" id = "gps1"  class = "input - input default" required/>
+              </div>
+                            <div class="col-sm-10">
+
+            <button class= "GPS1 btn btn-success" > 
+      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+
+             </button>
+            </div>
+
+            </div>
+
+            <div class="form-group">
+              <label for = "gps2" class = "col-sm-2"> Suradnica 2 </label>
+              <div class="col-sm-10">
+                <input type = "number" name = "gps2" id = "gps2" class = "input - input default" required/>
+              </div>
+                            <div class="col-sm-10">
+
+                <button class= "GPS2 btn btn-success" > Zmeraj GPS 
+                      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+</button>
+            </div>
+
+            </div>
+            
+            <div class="form-group">
+              <label for = "high" class = "col-sm-2"> Nadmorska vyska </label>
+                <div class="col-sm-10">
+              <input type = "number" name ="high" class = "input - input default" required/>
+                </div>
+            </div>
+                
+              <div class="form-group">
+                <label for = "habitatSelect" class = "col-sm-2"> Biotop </label>
+                <div class="col-sm-10">
+                   {{>habitatSelectTempl}}
+                </div>
+              </div>
+
+            <label for ="size"> Rozmer oblasti</label>
+            <input type = "number" name ="size" id ="size" class = "input - input default" required>
+            <div class="form-group">
+              <label for = "cardinalSelect" class = "col-sm-2"> Expozicia </label>
+              <div class="col-sm-10">
+             {{>cardinalTemplate}}
+              </div>
+            </div>
+    <button type="button" class="btn btn-default takePhoto" aria-label="Left Align">
+  <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+</button>
+    <img class="photo img-responsive-">
+                  <div class="form-group">
+
+            <input type='submit' value ="Uložiť"  class="col-sm-2 btn btn-success">
+             </div>
+         </form>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+
+
+ <template name ="cardinalTemplate">
+  <select name ="cardinalSelect">
+        {{#each cardinals}}
+            {{>cardinal}}
+        {{/each}}
+        </select>
+
+        {{>map}}
+ </template>
+
+  <template name ="cardinal">
+   <option value= {{skratka}}> {{strana}} </option>
+   </template>    

@@ -1,0 +1,12 @@
+
+		<template name = "tablePlants">
+		<table border="1" style="width:100%" class = "table table-striped">
+			
+			<th>Meno</th> 		<th>Pokryvnosť</th>  <th>Sociabilita</th> 	<th>Vitalita</th> <th></th>
+
+				{{#each plants}}
+					{{>plant}}
+				{{/each}}
+
+		</table>
+		</template>
