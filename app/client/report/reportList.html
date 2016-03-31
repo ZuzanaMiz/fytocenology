@@ -1,5 +1,19 @@
-<template name ="reportList">
-	{{#each reportId}}
-	  	<li>{{>report}} </li>
-	{{/each}}
+<template name="reportList">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th>Dátum</th>
+                <th>Autor</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each reportId}}
+                {{>report}}
+            {{/each}}
+
+            </tbody>
+        </table>
+    </div>
 </template>

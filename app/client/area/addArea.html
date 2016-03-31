@@ -1,109 +1,132 @@
+<template name="addArea">
+    <!--  page-wrapper -->
+    <div id="page-wrapper">
 
-<template name = "addArea">
-<ul class="nav nav-pills">
-  <li role="presentation" ><a href="/">Home</a></li>
-  <li role="presentation"><a href="/ZoznamOblasti">Zoznam oblastí</a></li>
-  <li role="presentation" class="active"><a href="/pridajOblast">Pridaj oblasť</a></li>
-  <li role="presentation" ><a href="/nastavenia">Nastavenia</a></li>
+        <div class="row">
+            <!-- Page Header -->
+            <div class="col-lg-12">
+                <h1 class="page-header">Nová oblasť </h1>
+            </div>
+            <!--End Page Header -->
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Nová oblasť
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+
+                        <form class="new-area form-horizontal form-label-left">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Názov oblasti</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name='place' placeholder="Miesto">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Popis <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <textarea class="form-control" name="description" rows="3"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                <button type="button" class="btn btn-warning GPS1">
+                                    GPS1 <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                </button>
+                                <button type="button" class="btn btn-warning GPS2">
+                                    GPS2<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                                </button>
 
 
-</ul>
-  <div class = "containter">
-    <div class="panel panel-primary">
-      <div class="panel-heading"> Zadanie novej oblasti </div>
-        <div class="panel-body">                            
-          <form  class = "new-area form-vertical">
-            <div class="form-group">
-                <label for = "name" class = "col-sm-2"> Nazov obce </label>
-                <div class="col-sm-10">
-                  <input type = "text" name ="place" class = "input - input default" required/>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Súradnica</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name="gps1" id="gps1"
+                                           placeholder="Zmerajte suradnice">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Súradnica 2 </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name="gps2" id="gps2"
+                                           placeholder="Zmerajte suradnice">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Nadmorska výška </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="number" class="form-control" name="high" id="high"
+                                           placeholder="Nadmorska vyska">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Expozicia</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select name="cardinalSelect" id="cardinalSelect" class="form-control">
+
+                                        <option value=""></option>
+
+                                        {{#each cardinals}}
+                                            {{>cardinal}}
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Biotop</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select name="habitatSelect" id="habitatSelect" class="form-control">
+                                        <option value=""></option>
+                                        {{#each biotops}}
+                                            {{>habitat}}
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Rozmer oblasti </label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" name="sizeHab" id="sizeHab"
+                                           placeholder="Rozmer">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    {{>map}}
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
                 </div>
-              </div>
-                 <div class="form-group">
-              <label for = "description" class = "col-sm-2"> Popis miesta </label>
-                 <div class="col-sm-10">
-              <textarea name ="description" rows = "10" cols = "30" class = "form-control" > </textarea>
-             </div>
             </div>
-            
-            <div class="form-group">
-              <label for = "gps1" class = "col-sm-2"> Suradnica 1</label>
-              <div class="col-sm-10">
-                <input type = "number" name = "gps1" id = "gps1"  class = "input - input default" required/>
-              </div>
-                            <div class="col-sm-10">
+        </div>
 
-            <button class= "GPS1 btn btn-success" > 
-      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-
-             </button>
-            </div>
-
-            </div>
-
-            <div class="form-group">
-              <label for = "gps2" class = "col-sm-2"> Suradnica 2 </label>
-              <div class="col-sm-10">
-                <input type = "number" name = "gps2" id = "gps2" class = "input - input default" required/>
-              </div>
-                            <div class="col-sm-10">
-
-                <button class= "GPS2 btn btn-success" > Zmeraj GPS 
-                      <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-</button>
-            </div>
-
-            </div>
-            
-            <div class="form-group">
-              <label for = "high" class = "col-sm-2"> Nadmorska vyska </label>
-                <div class="col-sm-10">
-              <input type = "number" name ="high" class = "input - input default" required/>
-                </div>
-            </div>
-                
-              <div class="form-group">
-                <label for = "habitatSelect" class = "col-sm-2"> Biotop </label>
-                <div class="col-sm-10">
-                   {{>habitatSelectTempl}}
-                </div>
-              </div>
-
-            <label for ="size"> Rozmer oblasti</label>
-            <input type = "number" name ="size" id ="size" class = "input - input default" required>
-            <div class="form-group">
-              <label for = "cardinalSelect" class = "col-sm-2"> Expozicia </label>
-              <div class="col-sm-10">
-             {{>cardinalTemplate}}
-              </div>
-            </div>
-    <button type="button" class="btn btn-default takePhoto" aria-label="Left Align">
-  <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-</button>
-    <img class="photo img-responsive-">
-                  <div class="form-group">
-
-            <input type='submit' value ="Uložiť"  class="col-sm-2 btn btn-success">
-             </div>
-         </form>
-      </div>
     </div>
-  </div>
+    <!-- end page-wrapper -->
+
 
 </template>
 
 
-
- <template name ="cardinalTemplate">
-  <select name ="cardinalSelect">
-        {{#each cardinals}}
-            {{>cardinal}}
-        {{/each}}
-        </select>
-
-        {{>map}}
- </template>
-
-  <template name ="cardinal">
-   <option value= {{skratka}}> {{strana}} </option>
-   </template>    
+<template name="cardinal">
+    <option value= {{degree}}> {{name}} </option>
+</template>

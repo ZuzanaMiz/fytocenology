@@ -1,9 +1,10 @@
 Plants = new Mongo.Collection('plants');
 Areas = new Mongo.Collection('areas');
-Cardinals = new Ground.Collection('strany');
+Cardinals = new Ground.Collection('cardinals');
 Biotops =  new Ground.Collection('habitats');
-VegetationZone = new Mongo.Collection('vegetationDegrees');
+VegetationZone = new Mongo.Collection('vegetationZone');
 VegetationCover = new Ground.Collection('vegetationCover');
 Reports = new Mongo.Collection('reports');
 UserSettings = new Mongo.Collection('userSettings');
+Photos = new Mongo.Collection('photos');
 

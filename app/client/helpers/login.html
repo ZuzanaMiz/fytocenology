@@ -1,21 +1,17 @@
+<template name="login">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a href="/">Home</a></li>
+        <li role="presentation"><a href="/ZoznamOblasti">Zoznam oblastí</a></li>
+        <li role="presentation"><a href="/pridajOblast">Pridaj oblasť</a></li>
+        <li role="presentation"><a href="/nastavenia">Nastavenia</a></li>
+    </ul>
 
-<template name = "login">
-  <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="/">Home</a></li>
-  <li role="presentation"><a href="/ZoznamOblasti">Zoznam oblastí</a></li>
-  <li role="presentation"><a href="/pridajOblast">Pridaj oblasť</a></li>
-  <li role="presentation" ><a href="/nastavenia">Nastavenia</a></li>
-</ul>
-
-{{#if currentUser 'true'}}
-	<h1>Prosím prihláste sa</h1>
-{{else}}
-	<h1> Vitajte </h1>
-{{/if}}
-
+    {{#if currentUser 'true'}}
+        <h1>Prosím prihláste sa</h1>
+    {{else}}
+        <h1> Vitajte </h1>
+    {{/if}}
 
 
-
-	
 </template>
 

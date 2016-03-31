@@ -1,55 +1,74 @@
-<template name = "addReport">
-  <div class = "containter">
-    <div class="panel panel-primary">
-      <div class="panel-heading"> Nový záznam v oblasti {{>backButton}} </div> 
-         
-        <div class="panel-body">                            
-          <form  class = "new-report form-vertical">
-              <div class="form-group">
-              <label for = "degreeSelect" class = "col-sm-2">Vegetačný stupeň </label>
-              <div class="col-sm-10">
-                  {{>degreeTempl}}
-              </div>
+<template name="addReport">
+    <div clas="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Pridaj záznam
             </div>
-             
-         <div class="form-group">
-              <label for = "cover" class = "col-sm-2"> Celková pokryvnosť </label>
-              <div class="col-sm-10">
-              <input type = "number" name ="cover" class = "input - input default" min = '0' max = '100'/>
-              </div> </div>
-              <div class="form-group">
-            <input type='submit' value ="Pridaj záznam"  class="col-sm-2 btn btn-success"/>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form class="form-horizontal form-label-left new-report">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Celková pokryvnosť (%)</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="number" class="form-control" name="cover"
+                                           placeholder="Celková pokryvnosť v %" min=0 max=100>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Celková pokryvnosť</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+
+                                    <button class="btn btn-default takePhoto" id="takePhoto">
+                                        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+                                    </button>
+                                    <img class="photo img-responsive">
+
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
             </div>
-         </form>
-      </div>
+        </div>
     </div>
-  </div>  
 </template>
 
- <template name ="degreeTempl" class="form-control">
-  <select name = "degreeSelect">
-     {{#each degrees}}
-         {{>degree}}
-     {{/each}}
-  </select>
- </template>
 
-<template name ="degree">
-   <option value= {{_id}} > {{name}} </option>
-</template>    
+<template name="degreeTempl" class="form-control">
+    <select name="degreeSelect">
+        {{#each degrees}}
+            {{>degree}}
+        {{/each}}
+    </select>
+</template>
 
-<template name = "stupneVegetTable">
-    <table border="1" style="width:50%" class = "table table-striped">
-      <th>Vegetačný stupeň</th>     <th>Pokryvnosť</th>  
+<template name="degree">
+    <option value= {{_id}}> {{name}} </option>
+</template>
+
+<template name="stupneVegetTable">
+    <table border="1" style="width:50%" class="table table-striped">
+        <th>Vegetačný stupeň</th>
+        <th>Pokryvnosť</th>
         {{#each degreeValue}}
             {{>stupenHodnotaRiadok}}
         {{/each}}
     </table>
- </template>
+</template>
 
- <template name = "stupenHodnotaRiadok">
+<template name="stupenHodnotaRiadok">
     <tr>
-    <td> {{vegetStupen}}     </td>
-    <td> {{hodnotaPokryvnosti}}   </td>
-  </tr>
-  </template>
+        <td> {{vegetStupen}}     </td>
+        <td> {{hodnotaPokryvnosti}}   </td>
+    </tr>
+</template>

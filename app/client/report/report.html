@@ -1,5 +1,11 @@
-<template name ="report">
-		<a href="/pridajRastlinu/{{_id}}"> 
-			{{localizedDateAndTime date}}
-		</a>
+<template name="report">
+
+
+    <tr>
+        <td><a href="/pridajRastlinu/{{_id}}">{{localizedDateAndTime date}}
+        </a></td>
+        <td>{{userId}}</td>
+    </tr>
+
+
 </template>

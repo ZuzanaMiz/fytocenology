@@ -1,4 +1,4 @@
 //Meteor.AppCache.config({
-  //chrome: false,
-  //IE: false
+//chrome: false,
+//IE: false
 //});

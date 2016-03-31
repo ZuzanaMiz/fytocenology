@@ -1,10 +1,54 @@
-<template name ="infoArea">
+<template name="infoPanelAreaBody">
+    <div class="panel-body green">
+        <h2>{{place}}</h2>
+        <p>{{description}} <br>
+            <label>Zemepisná šírka:</label> {{gps1}}<br>
+            <label>Zemepisná výška : </label> {{gps2}} <br>
+            <label>Nadmorská výška:</label>{{high}}<br>
+            <label>Expozícia:</label>{{exposure}}<br>
 
-	<h2>{{place}} </h2>
-		{{description}}
-	<br>
-	<b>Nadmorská výška:</b> {{high}} <br>
-	<b>Expozicia:</b> {{expozicia}}
- 	<img src= {{photo}} >
- 	
+
+        </p>
+    </div>
+
+</template>
+<template name="infoArea">
+
+    <div class="row">
+        <!-- Page Header -->
+        <div class="col-lg-12">
+            <h1 class="page-header">Informácie o oblasti</h1>
+        </div>
+        <!--End Page Header -->
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                {{>infoPanelAreaBody}}
+
+                <div class="panel-footer green">
+                    <button type="button" class="btn btn-success">Uprav oblasť</button>
+                    {{>changeButton}}
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Dátum</th>
+                    <th>Autor</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
 </template>

@@ -9,7 +9,7 @@ Meteor.publish('biotops', function(){
 	return Biotops.find();
 });
 
-Meteor.publish('strany', function(){
+Meteor.publish('cardinalsCount', function () {
 	return Cardinals.find();
 });
 

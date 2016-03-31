@@ -27,7 +27,7 @@ meteortoys:allthings	#for development
 mdg:camera
 mrt:moment
 ground:db
-appcache
+#appcache
 mdg:geolocation
 dburles:google-maps
 mrt:bootstrap-image-gallery

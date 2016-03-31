@@ -1,9 +1,7 @@
-Template.habitatSelectTempl.helpers({
-	biotops:function() {
-	return Biotops.find();
-}
+Template.addArea.helpers({
+    biotops: function () {
+        return Biotops.find();
+    }
 });
 
-Template.habitatSelectTempl.events({
-
-});
+Template.habitatSelectTempl.events({});

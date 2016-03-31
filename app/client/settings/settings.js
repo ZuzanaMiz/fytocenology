@@ -1,22 +1,42 @@
-//Session.setDefault('zobrazenie_stran', '8');
-//Session.setDefault('zobrazenie_pokryvnosti', 'BB');
+Template.setSettings.events({
+    'submit .settings_form': function (event) {
+        var degrees = event.target.formatExpozicieSelect.value;
+        var showCover = event.target.formatPokryvnostiSelect.value;
+        Session.set('zobrazenie_pokryvnosti', pokryvnostVar);
+        Session.set('zobrazenie_stran', strany);
+
+        Meteor.call("updateUserSettings", Meteor.userId(), showCover, degrees);
+        Session.set("settings_view", "info");
+        return false;
+    },
+
+    'reset .settings_form': function (event) {
 
 
-Template.settings.events({'submit .settings_form':function(event) {
+    }
+});
+Template.actualSettings.events({
+    'click .wantChangeSettings': function (event) {
+        Session.set("settings_view", "change");
+    }
+});
+Template.settings.helpers({
+    'settings_view_is_change': function () {
+        return Session.get("settings_view") == "change";
 
-
-var strany = event.target.formatExpozicieSelect.value;
-var pokryvnostVar= event.target.formatPokryvnostiSelect.value;
-
-
- Session.set('zobrazenie_pokryvnosti', pokryvnostVar);
-
- Session.set('zobrazenie_stran', strany);
-
- //UserSettings.update({'user': Meteor.userId(), 'zobrazenie_stran':strany, 'zobrazenie_pokryvnosti' :pokryvnostVar});
- console.log(Session.get('zobrazenie_stran'));
-
-	 	return false; 
- 	 }
+    },
+});
+//not work
+Template.actualSettings.helpers({
+    "cardinalsCount": function () {
+        console.log(UserSettings.find({user: Meteor.userId()}));
+        var userSettings = UserSettings.findOne({user: "default"});
+        return userSettings.cover;
+    },
+    'coverType': function () {
+        var userSettings = UserSettings.findOne({user: Meteor.userId()});
+        return userSettings.cover;
+    }
 
 });
+

@@ -1,8 +1,13 @@
 Template.galeria.helpers({
 
-oblastiId: function () {
+    reportPhotos: function () {
 
-	return Areas.find();
-}
+        return Photos.find({idReport: Session.get("report")});
+    }
+    //resizePicture: function (picture) {
+    //    picture.high = 50;
+    //    picture.width = 50;
+    //    return picture;
+    //}
 
 });
