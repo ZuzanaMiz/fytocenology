@@ -1,0 +1,93 @@
+<template name="areasSelected">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fytocenology</title>
+        <!-- Core CSS - Include with every page -->
+        <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
+        <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+        <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet"/>
+        <link href="assets/css/style.css" rel="stylesheet"/>
+        <link href="assets/css/main-style.css" rel="stylesheet"/>
+
+    </head>
+
+    <body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="navbar">
+            <!-- navbar-header -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1> Fytocenology </h1>
+            </div>
+            <!-- end navbar-header -->
+
+
+        </nav>
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <!-- sidebar-collapse -->
+            <div class="sidebar-collapse">
+                <!-- side-menu -->
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <!-- user image section-->
+                        <div class="user-section">
+                            <div class="user-section-inner">
+                                <img src="assets/img/user.jpg" alt="">
+                            </div>
+                            <div class="user-info">
+                                <div>{{>loginButtons}}</div>
+                                <div class="user-text-online">
+                                    <span class="user-circle-online btn {{getOnlineButtonColor}} btn-circle "></span>&nbsp;{{getOnlineStatus}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end user image section-->
+                    </li>
+                    <li class="sidebar-search">
+                        <!-- search section-->
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </span>
+                        </div>
+                        <!--end search section-->
+                    </li>
+                    <li class="">
+                        <a href="/"> <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                            Home</a>
+                    </li>
+
+                    <li class="selected">
+                        <a href="zoznamOblasti">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                            Zoznam oblastí</a>
+                    </li>
+                    <li class="">
+                        <a href="nastavenia"> <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+                            Nastavenia</a>
+
+                        <!-- second-level-items -->
+                    </li>
+                </ul>
+                <!-- end side-menu -->
+            </div>
+            <!-- end sidebar-collapse -->
+        </nav>
+
+        {{>yield}}
+    </div>
+
+    </body>
+    <hr/>
+    <p>Copyright &copy; Fytocenology, 2015-2016</p>
+
+</template>
