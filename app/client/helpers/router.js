@@ -3,6 +3,20 @@ Router.configure({
 
 });
 
+Router.onBeforeAction(function () {
+    // all properties available in the route function
+    // are also available here such as this.params
+
+    if (!Meteor.userId()) {
+        // if the user is not logged in, render the Login template
+        this.render('login');
+    } else {
+        // otherwise don't hold up the rest of hooks or our route/action function
+        // from running
+        this.next();
+    }
+});
+
 Router.route('/', {
     template: 'login',
     name: 'login',
@@ -14,14 +28,11 @@ Router.route('/mapa', {
     template: 'map',
     name: 'map'
 });
-Router.route('/galeria', {
-    template: 'galeria',
-    name: 'galeria'
-});
+
 
 Router.route('/pridajRastlinu/:_id', {
-    template: 'addPlant',
-    name: 'addPlant',
+    template: 'editReport',
+    name: 'editReport',
     data: function () {
         var currentArea = this.params._id;
         Session.set("report", currentArea);
@@ -55,7 +66,7 @@ Router.route('/pridajZaznam', {
 });
 
 Router.route('/spravaOblasti/:_id', {
-    template: 'editArea',
+    template: 'areaViewAndChange',
     name: 'spravaOblastiSId',
     data: function () {
         var currentArea = this.params._id;

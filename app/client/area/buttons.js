@@ -1,17 +1,17 @@
 Template.changeButton.events({
-    'click .addNew': function (event) {
-        Session.set('wantAddArea', "yes");
+    'click .addNew': function () {
+        Session.set('wantAddReport', "yes");
     }
 });
 
 Template.backButton.events({
-    'click .addNew': function (event) {
-        Session.set('wantAddArea', "no");
+    'click .addNew': function () {
+        Session.set('wantAddReport', "no");
     }
 });
 
 Template.finalButton.events({
-    'click .closeZaznam': function (event) {
+    "click .closeReport": function () {
         Meteor.call("updateFinalReport", Session.get("report"), "true");
     }
 });

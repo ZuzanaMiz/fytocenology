@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="panel-heading"> Pridaj rastlinu</div>
             <div class="panel-body">
-                <form class="add-plant">
+                <form class="add-plant form-horizontal">
 
                     <div class="table-responsive">
 
@@ -26,35 +26,9 @@
                                 {{>plant}}
                             {{/each}}
 
-                            <tr class="gradeX">
-                                <td class="center">
-                                    <input type="text" name="name" class="input - input default">
-                                </td>
-                                <td class="center">
-                                    {{#if getZobrazenieStupnov 'VDM'}}
-                                        {{>VDMdegree}}
-                                    {{else}}
-                                        {{>BBdegree}}
-                                    {{/if}}
-                                </td>
-                                <td class="center">
-                                    <input type="number" name="sociability" min="1" max="5">
-                                </td>
-                                <td class="center">
-                                    <input type="number" name="vitality" min="1" max="4"
-                                           class="input input-success">
-                                </td>
-                                <td class="center">
-                                    zatial nic
-                                </td>
-                                <td class="center">
-                                    <button type="submit" class="btn btn-success btn-circle">
-                                        <span class="glyphicon glyphicon-check"></span>
-                                    </button>
-                                </td>
-
-                            </tr>
-
+                            {{#if isClosed 'false'}}
+                                {{>addPlantRow}}
+                            {{/if}}
                             </tbody>
                         </table>
 

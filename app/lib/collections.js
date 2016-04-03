@@ -7,4 +7,5 @@ VegetationCover = new Ground.Collection('vegetationCover');
 Reports = new Mongo.Collection('reports');
 UserSettings = new Mongo.Collection('userSettings');
 Photos = new Mongo.Collection('photos');
+SavedAreas = new Mongo.Collection('savedAreas');
 

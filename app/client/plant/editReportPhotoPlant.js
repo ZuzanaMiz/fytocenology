@@ -1,16 +1,22 @@
-Template.tablePlants.helpers({
-    getZobrazenieStupnov: function (zobrazenie_pokryvnosti) {
-        return Session.get('zobrazenie_pokryvnosti') == 'VDM';
-    },
-
-});
-Template.addPlant.helpers({
-    isClosed: function (wantAddArea) {
+Template.editReport.helpers({
+    isClosed: function () {
 
         return (Reports.findOne(({_id: Session.get('report')})).closed) == 'false';
+    },
+    wantEditReport: function (wantEditReport) {
+        return Session.get("wantEditReport") === true;
+    },
+    dontWantEditReport: function () {
+        return Session.get("wantEditReport") !== true || Session.get("wantEditReport") === null;
+    },
+    canEdit: function () {
+        var report = Reports.findOne({_id: this._id});
+        return (report.userId === Meteor.userId() && report.closed === false)
+            && (Session.get("wantEditReport") === null || Session.get("wantEditReport") !== true);
     }
 });
-Template.addPlant.events({
+
+Template.editReport.events({
     'click .takePhoto': function (event, template) {
         var cameraOptions = {
             width: 800,
@@ -25,45 +31,22 @@ Template.addPlant.events({
             }
         });
         event.preventDefault();
-    }
-});
+    },
+    'click .editReport': function () {
+        Session.set("wantEditReport", true);
 
-Template.tablePlants.events({
-    'submit .add-plant': function (event) {
-        var name = event.target.name.value;
-        var stup = "";
-
-        //  if (Session.get('zobrazenie_pokryvnosti')=='VDM') {
-        stup = event.target.degree.value;
-        //}
-        // else {
-        //  stup= event.target..value;
-        //      }
-
-        var vital = event.target.vitality.value;
-        var sociabil = event.target.sociability.value;
-        var id = Session.get("report");
-
-        Meteor.call("insertPlant", name, stup, vital, sociabil, id);
-
-        name = "";
-        stup = "";
-        vital = "";
-        sociabil = "";
-        id = "";
-        event.target.name.value = "";
-        event.target.degree.value = "";
-        event.target.vitality.value = "";
-        event.target.sociability.value = "";
-        event.target.formatPokryvnostiSelect.value = "";
-
+    },
+    'submit .edit-report': function (event, template) {
+        var cover = event.target.cover.value;
+        Meteor.call("updateReportCover", this._id, cover);
+        event.target.cover.value = "";
+        Session.set("wantEditReport", false);
         return false;
+
     }
+
 });
 
 
-Template.plant.events({
-    'click .delete': function () {
-        Meteor.call("removePlant", this._id);
-    }
-});
+
+

@@ -11,8 +11,11 @@
         <td class="center"><a href="/spravaOblasti/{{_id}}"> {{place}}</a></td>
         <td class="center">{{gps1}}</td>
         <td class="center">{{user}}</td>
-        <td class="center"><input type="checkbox" value=""></td>
-        <td class="center"><input type="checkbox" value=""></td>
-
+        <td class="center"><input type="checkbox" class="isSaved" checked={{saved}}></td>
+        {{#if userIsOwner 'true'}}
+            <td class="center"><input type="checkbox" class="isPublic" checked={{public}}></td>
+        {{else}}
+            <td class="center"><span class="glyphicon glyphicon-lock"></span></td>
+        {{/if}}
     </tr>
 </template>

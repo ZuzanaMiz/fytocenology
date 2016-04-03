@@ -1,17 +1,24 @@
 Template.setSettings.events({
     'submit .settings_form': function (event) {
-        var degrees = event.target.formatExpozicieSelect.value;
-        var showCover = event.target.formatPokryvnostiSelect.value;
-        Session.set('zobrazenie_pokryvnosti', pokryvnostVar);
-        Session.set('zobrazenie_stran', strany);
 
-        Meteor.call("updateUserSettings", Meteor.userId(), showCover, degrees);
+        var degrees = formatExpozicieSelect.value;
+        var showCover = formatPokryvnostiSelect.value;
+        var actualSettings = UserSettings.findOne({user: Meteor.userId()});
+
+        if (actualSettings === null || actualSettings === undefined) {
+
+            Meteor.call("insertUserSettings", Meteor.userId(), showCover, degrees);
+        } else {
+            Meteor.call("updateUserSettings", Meteor.userId(), showCover, degrees);
+        }
+
         Session.set("settings_view", "info");
         return false;
     },
-
-    'reset .settings_form': function (event) {
-
+    "click .defaultValues": function () {
+        var defaultSettings = UserSettings.findOne({user: "default"});
+        formatExpozicieSelect.value = defaultSettings.degrees;
+        formatPokryvnostiSelect.value = defaultSettings.cover;
 
     }
 });
@@ -29,9 +36,8 @@ Template.settings.helpers({
 //not work
 Template.actualSettings.helpers({
     "cardinalsCount": function () {
-        console.log(UserSettings.find({user: Meteor.userId()}));
-        var userSettings = UserSettings.findOne({user: "default"});
-        return userSettings.cover;
+        var userSettings = UserSettings.findOne({user: Meteor.userId()});
+        return userSettings.degrees;
     },
     'coverType': function () {
         var userSettings = UserSettings.findOne({user: Meteor.userId()});

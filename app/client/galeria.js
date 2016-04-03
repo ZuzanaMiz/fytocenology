@@ -4,10 +4,22 @@ Template.galeria.helpers({
 
         return Photos.find({idReport: Session.get("report")});
     }
-    //resizePicture: function (picture) {
-    //    picture.high = 50;
-    //    picture.width = 50;
-    //    return picture;
-    //}
+
+});
+
+Template.galeria.events({
+
+    'click .remove': function () {
+        console.log("removing photo" + this._id);
+        Meteor.call("removePhoto", this._id);
+    }
+
+
+});
+
+Template.showPicture.helpers({
+    'setActualPhoto': function () {
+        Session.set("actualPhoto", this._id);
+    }
 
 });

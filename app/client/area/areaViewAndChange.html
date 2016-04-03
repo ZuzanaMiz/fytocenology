@@ -1,0 +1,15 @@
+<template name="areaViewAndChange">
+    <div id="page-wrapper">
+        {{#if areaViewAndChange true }}
+            {{>editArea}}
+        {{else}}
+            {{>infoArea}}
+        {{/if}}
+        {{>reportList}}
+
+        {{#if wantAdd 'yes'}}
+            {{> addReport}}
+        {{/if}}
+    </div>
+</template>
+

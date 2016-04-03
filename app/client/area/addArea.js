@@ -2,18 +2,22 @@ Template.body.helpers({
     areas: function () {
 
         return Areas.find();
-    }
+    },
+
 });
+
 
 Template.addArea.helpers({
     cardinals: function () {
-        console.log(Session.get('zobrazenie_stran'));
         if (Session.get('zobrazenie_stran') == "8") {
             return Cardinals.find();
         } else {
             return Cardinals.find({basic: true});
         }
 
+    },
+    biotops: function () {
+        return Biotops.find();
     }
 
 });

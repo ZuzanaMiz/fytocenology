@@ -19,8 +19,8 @@
 //Meteor.call("insertHabitat", "luka", 1, "default");
 
 //Meteor.call("insertReport",23, "EDTy3kYvri4sHX7Wd", null, Meteor.userId(), new Date());
-//Meteor.call("insertUserSettings", "default-values", "Braun-Blanquet", 8);
-//Meteor.call("insertUserSettings", Meteor.userId(),"Braun-Blanquet", 8 );
+
+//Meteor.call("insertUserSettings","default","Braun-Blanquet", 8 );
 
 
 

@@ -10,6 +10,6 @@ Template.registerHelper('getOnlineButtonColor', function () {
     if (Meteor.status().status === "connected") {
         return "btn-success";
     } else {
-        return "btn-error";
+        return "btn-warning";
     }
 });

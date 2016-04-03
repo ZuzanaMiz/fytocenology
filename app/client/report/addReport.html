@@ -3,6 +3,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Pridaj záznam
+                {{>backButton}}
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -16,17 +17,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Celková pokryvnosť</label>
-                                <div class="col-md-9 col-sm-9 col-xs-12">
 
-                                    <button class="btn btn-default takePhoto" id="takePhoto">
-                                        <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
-                                    </button>
-                                    <img class="photo img-responsive">
-
-                                </div>
-                            </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
@@ -44,31 +35,5 @@
 </template>
 
 
-<template name="degreeTempl" class="form-control">
-    <select name="degreeSelect">
-        {{#each degrees}}
-            {{>degree}}
-        {{/each}}
-    </select>
-</template>
 
-<template name="degree">
-    <option value= {{_id}}> {{name}} </option>
-</template>
 
-<template name="stupneVegetTable">
-    <table border="1" style="width:50%" class="table table-striped">
-        <th>Vegetačný stupeň</th>
-        <th>Pokryvnosť</th>
-        {{#each degreeValue}}
-            {{>stupenHodnotaRiadok}}
-        {{/each}}
-    </table>
-</template>
-
-<template name="stupenHodnotaRiadok">
-    <tr>
-        <td> {{vegetStupen}}     </td>
-        <td> {{hodnotaPokryvnosti}}   </td>
-    </tr>
-</template>

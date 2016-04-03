@@ -1,17 +1,3 @@
-<template name="infoPanelAreaBody">
-    <div class="panel-body green">
-        <h2>{{place}}</h2>
-        <p>{{description}} <br>
-            <label>Zemepisná šírka:</label> {{gps1}}<br>
-            <label>Zemepisná výška : </label> {{gps2}} <br>
-            <label>Nadmorská výška:</label>{{high}}<br>
-            <label>Expozícia:</label>{{exposure}}<br>
-
-
-        </p>
-    </div>
-
-</template>
 <template name="infoArea">
 
     <div class="row">
@@ -24,30 +10,33 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="panel panel-info">
-                {{>infoPanelAreaBody}}
+                <div class="panel-body green">
+                    <h2>{{place}}
 
+                        {{#if isEditPossible}}
+                            <button type="button" style="float:right;" class="btn btn-danger btn-circle removeArea">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        {{/if}}
+                    </h2>
+                    <p>{{description}} <br>
+                        <label>Zemepisná šírka:</label> {{gps1}}<br>
+                        <label>Zemepisná výška : </label> {{gps2}} <br>
+                        <label>Nadmorská výška:</label>{{high}}<br>
+                        <label>Expozícia:</label>{{exposure}}<br>
+
+
+                    </p>
+                </div>
                 <div class="panel-footer green">
-                    <button type="button" class="btn btn-success">Uprav oblasť</button>
                     {{>changeButton}}
+                    {{#if isEditPossible}}
+                        <button type="button" class="btn btn-success editMode">Uprav oblasť</button>
+                    {{/if}}
                 </div>
             </div>
         </div>
 
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Dátum</th>
-                    <th>Autor</th>
-                </tr>
-                </thead>
-                <tbody>
-
-
-                </tbody>
-            </table>
-        </div>
 
     </div>
 

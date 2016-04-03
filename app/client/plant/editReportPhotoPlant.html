@@ -1,4 +1,4 @@
-<template name="addPlant">
+<template name="editReport">
     <div id="page-wrapper">
         <!-- Page Header -->
         <div class="col-lg-12">
@@ -14,12 +14,36 @@
             <div class="panel panel-info">
                 <div class="panel-body green">
                     {{localizedDateAndTime date}} <br>
-                    Celková pokryvnosť :{{cover}}
+                    Celková pokryvnosť :
+                    {{#if wantEditReport true}}
+                        <form class="edit-report">
+                            <input type="number" name="cover" value={{cover}} class="" min="0" max="100">
+                            <button type="submit" class="btn btn-success">
+                                <span class="glyphicon glyphicon-check"></span>
+                            </button>
+                        </form>
+                    {{/if}}
+
+
+                    {{#if dontWantEditReport true}}
+                        {{cover}}
+                    {{/if}}
+                    {{#if canEdit true}}
+                        <button type="button" class="btn btn-default editReport">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <br>
+                    {{/if}}
+
+
+
 
                     {{#if isClosed 'false'}}
-                        <button type="button" class="btn btn takePhoto">
+                        <button type="button" class="btn btn-default takePhoto">
                             <span class="glyphicon glyphicon-camera"></span>Fotografia
                         </button>
+
+
                         {{>finalButton}}
 
                     {{/if}}
@@ -36,12 +60,12 @@
 </template>
 
 
-<template name="VDMdegree">
+<template name="VDMcover">
 
     <input type="number" name="degree" min="1" max="9">
 </template>
 
-<template name="BBdegree">
+<template name="BBcover">
     <select name="degree">
         <option value="1"> r</option>
         <option value="2"> +</option>

@@ -1,85 +1,140 @@
 Meteor.methods({
 
-	insertArea: function (naz, pop, sur1, sur2, high, exp, bio, user, size) {
+    insertArea: function (naz, pop, sur1, sur2, high, exp, bio, user, size) {
 
-		Areas.insert({
-			place: naz,
-			description: pop,
-			gps1: sur1,
-			gps2: sur2,
-			high: high,
-			exposure: exp,
-			habitat: bio,
-			user: user,
-			size: size
-		});
-	},
-	insertPlant: function (name, degree, vital, sociability, id) {
-		Plants.insert({
-			name: name,
-			degree: degree,
-			vitality: vital,
-			sociability: sociability,
-			reportId: id
-		});
-	},
+        Areas.insert({
+            place: naz,
+            description: pop,
+            gps1: sur1,
+            gps2: sur2,
+            high: high,
+            exposure: exp,
+            habitat: bio,
+            user: user,
+            size: size
+        });
+    },
 
-	removePlant: function (id) {
+    updateArea: function (id, name, desc, sur1, sur2, altitude, exp, bio, size) {
 
-	},
-	insertReport: function (cover, areaId, photo, idUser, date) {
+        Areas.update({
+            _id: id
+        }, {
+            $set: {
+                place: naz,
+                description: pop,
+                gps1: sur1,
+                gps2: sur2,
+                high: high,
+                exposure: exp,
+                habitat: bio,
+                size: size
+            }
+        });
+    },
 
-		Reports.insert({
+    removeArea: function (id) {
+//remove area
+        Areas.remove({_id: id});
 
-			cover: cover,
-			date: date,
-			areaId: areaId,
-			photo: photo,
-			closed: 'false',
-			userId: idUser
+        //cascade we have to remove reports and plants
+        var reports = Reports.find({areaId: id});
+        reports.forEach(function (report) {
+            Meteor.call("removeReport", report._id);
+        });
+    },
 
-		});
-	},
-	insertCardinals: function (degrees, name, basic) {
-		Cardinals.insert({
-			degree: degrees,
-			name: name,
-			basic: basic
+    removeReport: function (id) {
+        Plants.remove({reportId: id});
+        Photos.remove({idReport: id});
+        Reports.remove({_id: id});
+    },
 
-		});
-	},
+    insertPlant: function (name, degree, vital, sociability, id) {
+        Plants.insert({
+            name: name,
+            degree: degree,
+            vitality: vital,
+            sociability: sociability,
+            reportId: id
+        });
+    },
 
-	insertHabitat: function (name, size, user) {
-		Biotops.insert({
-			name: name,
-			size: size,
-			user: user,
+    removePlant: function (id) {
 
-		});
-	},
+    },
+    insertReport: function (cover, areaId, idUser, date) {
 
-	updateFinalReport: function (report, final) {
-		Reports.update({_id: report}, {$set: {closed: final}});
+        Reports.insert({
 
-	},
+            cover: cover,
+            date: date,
+            areaId: areaId,
+            closed: 'false',
+            userId: idUser
 
-	savePhoto: function (photo, idReport) {
+        });
+    },
+    insertCardinals: function (degrees, name, basic) {
+        Cardinals.insert({
+            degree: degrees,
+            name: name,
+            basic: basic
 
-		Photos.insert({
-			photo: photo,
-			idReport: idReport
-		});
-	},
+        });
+    },
 
-	removePhoto: function (id) {
-		Photos.removePhoto({_id: id});
-	},
+    insertHabitat: function (name, size, user) {
+        Biotops.insert({
+            name: name,
+            size: size,
+            user: user,
 
-	insertUserSettings: function (user, showCover, degrees) {
-		UserSettings.insert({user: Meteor.userId(), cover: showCover, degrees: degrees});
+        });
+    },
 
-	},
-	updateUserSettings: function (user, showCover, degrees) {
-		UserSettings.update({user: Meteor.userId(), cover: showCover, degrees: degrees});
-	}
+    updateFinalReport: function (report, final) {
+        Reports.update({_id: report}, {$set: {closed: final}});
+
+    },
+    updateReportCover: function (report, cover) {
+        Reports.update({_id: report}, {$set: {cover: cover}});
+    },
+
+    savePhoto: function (photo, idReport) {
+
+        Photos.insert({
+            photo: photo,
+            idReport: idReport
+        });
+    },
+
+    removePhoto: function (id) {
+        Photos.removePhoto({_id: id});
+    },
+
+    insertUserSettings: function (user, showCover, degrees) {
+        UserSettings.insert({user: Meteor.userId(), cover: showCover, degrees: degrees});
+
+    },
+    updateUserSettings: function (user, showCover, degrees) {
+        UserSettings.update({user: Meteor.userId()}, {$set: {cover: showCover, degrees: degrees}});
+    },
+    updateAreaPublic: function (id, isPublic) {
+        Areas.update({_id: id}, {$set: {public: isPublic}});
+    },
+    insertSavedArea: function (idUser, idArea) {
+        SavedAreas.insert({user: idUser, area: idArea});
+    },
+    removeSavedArea: function (idUser, idArea) {
+        SavedAreas.remove({user: idUser, area: idArea});
+    },
+
+    removePhoto: function (id) {
+        Photos.remove({_id: id});
+    },
+    getExposition: function (degrees) {
+        console.log("parsing");
+        return Cardinals.findOne({degree: degrees}).name;
+    }
 });

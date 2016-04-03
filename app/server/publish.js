@@ -1,29 +1,40 @@
-
-//moje plus verejne 
+//my and public
 Meteor.publish('areas', function() {
 	return Areas.find();
 
 });
-
+//all
 Meteor.publish('biotops', function(){
 	return Biotops.find();
 });
-
-Meteor.publish('cardinalsCount', function () {
+//in public and my areas
+Meteor.publish('photos', function () {
+    return Photos.find();
+});
+//my and default
+Meteor.publish('userSettings', function () {
+    return UserSettings.find();
+});
+//all
+Meteor.publish('cardinals', function () {
 	return Cardinals.find();
 });
 
-//len moje + verejne
-Meteor.publish('zaznamy', function(){
+//only my and public
+Meteor.publish('reports', function () {
 	return Reports.find();
 });
-
+//in my and default reports
 Meteor.publish('plants', function(){
 	return Plants.find();
 });
 
 Meteor.publish('vegetacneStupne', function(){
 	return VegetationZone.find();
+});
+
+Meteor.publish('savedAreas', function () {
+    return SavedAreas.find();
 });
 
  Meteor.publish("userData", function () {
