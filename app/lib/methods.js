@@ -85,7 +85,7 @@ Meteor.methods({
     },
 
     insertHabitat: function (name, size, user) {
-        Biotops.insert({
+        Habitats.insert({
             name: name,
             size: size,
             user: user,

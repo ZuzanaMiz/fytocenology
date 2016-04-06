@@ -10,8 +10,11 @@ Template.galeria.helpers({
 Template.galeria.events({
 
     'click .remove': function () {
-        console.log("removing photo" + this._id);
-        Meteor.call("removePhoto", this._id);
+        var gallery = $('#blueimp-gallery').data('gallery');
+        var index = gallery.getIndex();
+        var image = $('#links > a > img').get(index).getAttribute('data-photoId');
+
+        Meteor.call("removePhoto", image);
     }
 
 
