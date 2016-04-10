@@ -1,6 +1,7 @@
 Router.configure({
     layoutTemplate: 'areasSelected'
 
+
 });
 
 Router.onBeforeAction(function () {

@@ -4,8 +4,8 @@ Meteor.publish('areas', function() {
 
 });
 //all
-Meteor.publish('biotops', function(){
-	return Biotops.find();
+Meteor.publish('habitats', function () {
+    return Habitats.find();
 });
 //in public and my areas
 Meteor.publish('photos', function () {

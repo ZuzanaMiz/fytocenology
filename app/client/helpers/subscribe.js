@@ -1,5 +1,5 @@
 Meteor.subscribe('areas');
-Meteor.subscribe('biotops');
+Meteor.subscribe('habitats');
 Meteor.subscribe('cardinals');
 Meteor.subscribe('plants');
 Meteor.subscribe('reports');

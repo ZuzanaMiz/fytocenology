@@ -1,0 +1,106 @@
+<template name="area_list">
+    <!--  page-wrapper -->
+
+
+    <div id="page-wrapper">
+
+        <div class="row">
+            <!-- Page Header -->
+            <div class="col-lg-12">
+                <button type="button" style="float:right;" class="btn btn-success btn-circle ">
+                    <a href="/pridajOblast"> <span class="glyphicon glyphicon-plus"></span></a>
+                </button>
+                <h1 class="page-header">Oblast
+                </h1>
+            </div>
+
+            <!--End Page Header -->
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Advanced Tables -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Zoznam oblastí
+                    </div>
+                    <div class="panel-body">
+                        <form>
+
+
+                            <input type="textField" value="Zadaj nazov obce">
+
+                            <button type="button" class="btn btn-default search" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </form>
+                        <label class="onlyMy">
+                            <input type="checkbox" checked="{{onlyMyActual}}">
+                            Moje oblasti
+                        </label>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                <tr>
+                                    <th>Lokalita</th>
+                                    <th>Súradnice</th>
+                                    <th>Autor</th>
+                                    <th>Uložiť <span class="glyphicon glyphicon-pushpin"> </span></th>
+                                    <th>Zverejniť <span class="glyphicon glyphicon-cloud-upload"></span></th>
+
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+                                {{#each areas}}
+                                    {{>area}}
+                                {{/each}}
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <!--End Advanced Tables -->
+            </div>
+        </div>
+
+
+    </div>
+    <!-- end page-wrapper -->
+</template>
+
+<template name="infoPanelAreaBody">
+    <div class="panel-body green">
+        <h2>{{areaPlace}}</h2>
+        <p>{{areaDescription}} <br>
+            <label>Zemepisná šírka:</label> {{areaGps1}}<br>
+            <label>Zemepisná výška : </label> {{areaGps2}} <br>
+            <label>Nadmorská výška:</label>{{areaHigh}}<br>
+            <label>Expozícia:</label>{{areaExposure}}<br>
+
+
+        </p>
+    </div>
+
+</template>
+
+
+<template name="area">
+
+    <tr class="gradeA">
+        <td class="center"><a href="/spravaOblasti/{{_id}}"> {{place}}</a></td>
+        <td class="center">{{gps1}}</td>
+        <td class="center">{{user}}</td>
+        <td class="center"><input type="checkbox" class="isSaved" checked={{saved}}></td>
+        {{#if userIsOwner 'true'}}
+            <td class="center"><input type="checkbox" class="isPublic" checked={{public}}></td>
+        {{else}}
+            <td class="center"><span class="glyphicon glyphicon-lock"></span></td>
+        {{/if}}
+    </tr>
+</template>
+
+

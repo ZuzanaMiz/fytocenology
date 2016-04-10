@@ -1,0 +1,149 @@
+<template name="areaViewAndChange">
+    <div id="page-wrapper">
+        {{#if areaViewAndChange true }}
+            {{>editArea}}
+        {{else}}
+            {{>infoArea}}
+        {{/if}}
+        {{>reportList}}
+
+        {{#if wantAdd 'yes'}}
+            {{> addReport}}
+        {{/if}}
+    </div>
+</template>
+<template name="infoArea">
+
+    <div class="row">
+        <!-- Page Header -->
+        <div class="col-lg-12">
+            <h1 class="page-header">Informácie o oblasti</h1>
+        </div>
+        <!--End Page Header -->
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="panel panel-info">
+                <div class="panel-body green">
+                    <h2>{{place}}
+
+                        {{#if isEditPossible}}
+                            <button type="button" style="float:right;" class="btn btn-danger btn-circle removeArea">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        {{/if}}
+                    </h2>
+                    it
+                    <p>{{description}} <br>
+                        <label>Zemepisná šírka:</label> {{gps1}}<br>
+                        <label>Zemepisná výška : </label> {{gps2}} <br>
+                        <label>Nadmorská výška:</label>{{high}}<br>
+                        <label>Expozícia:</label>{{exposure}}<br>
+
+
+                    </p>
+                </div>
+                <div class="panel-footer green">
+                    {{>changeButton}}
+
+                    {{#if isEditPossible}}
+
+                        <button type="button" class="btn btn-success editMode">Uprav oblasť</button>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</template>
+<template name="reportList">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+
+                <th>Dátum</th>
+                <th>Autor</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each reportId}}
+                {{>report}}
+            {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+</template>
+<template name="report">
+    <tr>
+        <td><a href="/pridajRastlinu/{{_id}}">{{localizedDateAndTime date}}
+        </a></td>
+        <td>{{userId}}</td>
+
+    </tr>
+</template>
+<template name="addReport">
+    <div clas="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Pridaj záznam
+                {{>backButton}}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form class="form-horizontal form-label-left new-report">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Celková pokryvnosť (%)</label>
+                                <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="number" class="form-control" name="cover"
+                                           placeholder="Celková pokryvnosť v %" min=0 max=100>
+                                </div>
+                            </div>
+
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                                    <button type="reset" class="btn btn-primary">Cancel</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="changeButton">
+
+    <button type="button" class="addNew btn btn-warning">Pridaj záznam</button>
+
+</template>
+
+<template name="backButton">
+
+    <button class="addNew btn btn-danger btn-circle" style="float:right;">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </button>
+
+</template>
+<template name="finalButton">
+    <button class="closeReport btn btn-success"> Uzavri záznam</button>
+</template>
+
+
+
+
+
+
+
+
+
+

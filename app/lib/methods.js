@@ -15,17 +15,17 @@ Meteor.methods({
         });
     },
 
-    updateArea: function (id, name, desc, sur1, sur2, altitude, exp, bio, size) {
+    updateArea: function (id, name, desc, gps1, gps2, altitude, exp, bio, size) {
 
         Areas.update({
             _id: id
         }, {
             $set: {
-                place: naz,
-                description: pop,
-                gps1: sur1,
-                gps2: sur2,
-                high: high,
+                place: name,
+                description: desc,
+                gps1: gps1,
+                gps2: gps2,
+                high: altitude,
                 exposure: exp,
                 habitat: bio,
                 size: size
@@ -59,6 +59,11 @@ Meteor.methods({
             reportId: id
         });
     },
+    updatePlant: function (plantId, name, degree, vital, sociability) {
+
+        Plants.update({_id: plantId}, {$set: {name: name, degree: degree, vitality: vital, sociability: sociability}});
+
+    },
 
     removePlant: function (id) {
 
@@ -75,6 +80,7 @@ Meteor.methods({
 
         });
     },
+
     insertCardinals: function (degrees, name, basic) {
         Cardinals.insert({
             degree: degrees,
@@ -91,6 +97,11 @@ Meteor.methods({
             user: user,
 
         });
+
+    },
+    updateHabitat: function (name, size, user) {
+        Habitats.update({name: name, user: user}, {$set: {size: size}});
+
     },
 
     updateFinalReport: function (report, final) {
@@ -109,9 +120,6 @@ Meteor.methods({
         });
     },
 
-    removePhoto: function (id) {
-        Photos.removePhoto({_id: id});
-    },
 
     insertUserSettings: function (user, showCover, degrees) {
         UserSettings.insert({user: Meteor.userId(), cover: showCover, degrees: degrees});
