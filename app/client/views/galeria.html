@@ -2,9 +2,6 @@
 
 
     <div id="blueimp-gallery" class="blueimp-gallery">
-
-
-        >
         <!-- The container for the modal slides -->
         <div class="slides"></div>
         <!-- Controls for the borderless lightbox -->
@@ -31,7 +28,7 @@
                         <button type="button" class="remove btn btn-danger">
                             <span class="glyphicon glyphicon-trash"></span>
                         </button>
-                        <button type="button" class="btn btn-success">
+                        <button type="button" class="analyze btn btn-success">
                             <span class="glyphicon glyphicon-eye-open"></span>
                         </button>
                         <button type="button" class="btn btn-primary next">
@@ -48,7 +45,10 @@
         {{#each reportPhotos}}
             {{>showPicture}}
         {{/each}}
+    </div>
 
+    <div>
+        <canvas id="cvCanvas"></canvas>
     </div>
     <form class="uploadPicture form-vertical">
         <div class="form-group">

@@ -15,14 +15,39 @@ Template.galeria.events({
         var image = $('#links > a > img').get(index).getAttribute('data-photoId');
 
         Meteor.call("removePhoto", image);
-    },
-    'submit .uploadPicture': function () {
-        var picture = pictureUpload.value;
-        // var picture=FileReader.readFile(picturePath);
-        Meteor.call("savePhoto", picture, this._id);
+    }
 
-        console.log("save " + picture);
-        return false;
+});
+
+Template.galeria.events({
+
+    'click .analyze': function() {
+        var previewImage = $('#blueimp-gallery .modal-body img').get(0);
+        var canvas = $('#cvCanvas').get(0);
+        var imgWidth = previewImage.naturalWidth;
+        var imgHeight = previewImage.naturalHeight;
+
+        canvas.setAttribute('width', imgWidth);
+        canvas.setAttribute('height', imgHeight);
+
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(previewImage, 0, 0);
+
+        var imageData = ctx.getImageData(0, 0, imgWidth, imgHeight);
+
+        var gray_img = new jsfeat.matrix_t(imgWidth, imgHeight, jsfeat.U8_t | jsfeat.C1_t);
+        jsfeat.imgproc.grayscale(imageData.data, imgWidth, imgHeight, gray_img);
+
+
+        var data_u32 = new Uint32Array(imageData.data.buffer);
+        var alpha = (0xff << 24);
+        var i = gray_img.cols*gray_img.rows, pix = 0;
+        while(--i >= 0) {
+            pix = gray_img.data[i];
+            data_u32[i] = alpha | (pix << 16) | (pix << 8) | pix;
+        }
+
+        ctx.putImageData(imageData, 0, 0);
     }
 
 });
