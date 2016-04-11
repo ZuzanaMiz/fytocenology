@@ -36,7 +36,7 @@ Router.route('/pridajRastlinu/:_id', {
     name: 'editReport',
     data: function () {
         var currentArea = this.params._id;
-        Session.set("report", currentArea);
+        Session.setPersistent("report", currentArea);
         return Reports.findOne({_id: currentArea});
     }
 });
@@ -71,7 +71,7 @@ Router.route('/spravaOblasti/:_id', {
     name: 'spravaOblastiSId',
     data: function () {
         var currentArea = this.params._id;
-        Session.set("Area", currentArea);
+        Session.setPersistent("Area", currentArea);
         return Areas.findOne({_id: currentArea});
     }
 });

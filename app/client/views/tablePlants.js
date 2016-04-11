@@ -4,34 +4,37 @@ Template.tablePlants.helpers({
         return Plants.find({reportId: idz});
     },
     isClosed: function () {
-
         return (Reports.findOne(({_id: Session.get('report')})).closed) == 'false';
-    }
+    },
+    existEdit: function () {
+        return Session.get('editedPlant') == undefined;
+    },
 });
 Template.plant.events({
+
     'click .delete': function () {
         Meteor.call("removePlant", this._id);
     },
     'click .editPlant': function () {
-        Session.set(this._id, 'is');
+        if (Session.get('editedPlant') === null || Session.get('editedPlant') === undefined) {
+            Session.setPersistent('editedPlant', this._id);
+        }
     },
     'click .savePlant': function (event, template) {
-        var namevalue = "name_" + this._id;
 
 
-        name = ("name_" + this._id).value;
+        var name = name_edit.value;
         console.log(name);
-        degree = ("degree").value;
-        sociability = ("sociability_" + this._id).value;
-        vitality = ("vitality_" + this._id).value;
-        Meteor.call("updatePlant", (this._id, name, degree, vitality, sociability));
-        Session.set(this._id, null);
+        var degree = degree_edit.value;
+        var sociability = sociability_edit.value;
+        var vitality = vitality_edit.value;
+        Meteor.call("updatePlant", this._id, name, degree, vitality, sociability);
+        Session.clear('editedPlant');
     }
 });
 Template.plant.helpers({
     'isEditable': function () {
-        console.log(this._id);
-        return Session.get(this._id) === 'is';
+        return Session.get('editedPlant') === this._id;
 
     },
     'getCoverType': function () {
