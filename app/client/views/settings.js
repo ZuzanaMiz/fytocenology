@@ -4,32 +4,50 @@ Template.setSettings.events({
         var degrees = formatExpozicieSelect.value;
         var showCover = formatPokryvnostiSelect.value;
         var actualSettings = UserSettings.findOne({user: Meteor.userId()});
-        var rows = settingsTable.rows;
-        console.log(rows);
-        var i, j, cells, habitat, value;
+        var rows = $('#habitat_table').find('tr:not(:hidden)');
 
-        for (i = 0, j = rows.length; i < j; ++i) {
-            cells = rows[i].getElementsByTagName('td');
-            if (!cells.length) {
-                continue;
-            }
-            habitat = cells[0];
+        rows.each(function () {
+            console.log(this);
+            var elements = $(this).find('td');
+            console.log(elements);
+            var habitat = elements[0];
+            var number = elements[1];
             console.log(habitat);
-            value = cells[1];
+            var actHabit = Habitats.findOne({user: Meteor.userId(), name: habitat});
 
+            if (actHabit === null || actHabit === undefined) {
+                Meteor.call("insertHabitat", habitat, number);
+            } else {
+                Meteor.call("updateHabitat", habitat, number);
+            }
+
+        });
+
+
+        /* var i, j, cells, habitat, value;
+
+         for (i = 0, j = rows.length; i < j; ++i) {
+         cells = rows[i].getElementsByTagName('td');
+         if (!cells.length) {
+         continue;
+         }
+         habitat = cells[0];
+         console.log(habitat);
+         value = cells[1];
+         */
 
             var actHabit = Habitats.findOne({user: Meteor.userId(), name: habitat});
             if (actHabit === null || actHabit === undefined) {
-                Meteor.call("insertHabitat", habitat, value, Meteor.userId());
+                Meteor.call("insertHabitat", habitat, value);
             } else {
-                Meteor.call("updateHabitat", habitat, value, Meteor.userId());
+                Meteor.call("updateHabitat", habitat, value);
             }
-        }
+        //   }
         if (actualSettings === null || actualSettings === undefined) {
 
-            Meteor.call("insertUserSettings", Meteor.userId(), showCover, degrees);
+            Meteor.call("insertUserSettings", showCover, degrees);
         } else {
-            Meteor.call("updateUserSettings", Meteor.userId(), showCover, degrees);
+            Meteor.call("updateUserSettings", showCover, degrees);
         }
 
         Session.set("settings_view", "info");
@@ -83,5 +101,4 @@ Template.habitats.helpers({
     }
 
 });
-
 

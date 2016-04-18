@@ -1,5 +1,5 @@
 Router.configure({
-    layoutTemplate: 'areasSelected'
+    layoutTemplate: 'main'
 
 
 });
@@ -17,17 +17,11 @@ Router.onBeforeAction(function () {
         this.next();
     }
 });
-
 Router.route('/', {
     template: 'login',
     name: 'login',
     layoutTemplate: 'main'
 
-});
-
-Router.route('/mapa', {
-    template: 'map',
-    name: 'map'
 });
 
 
@@ -49,8 +43,9 @@ Router.route('/pridajOblast', {
 Router.route('/nastavenia', {
     template: 'settings',
     name: 'settings',
-    layoutTemplate: 'settingsSelected',
+
     data: function () {
+
         return UserSettings.find({user: Meteor.userId()});
     }
 });
@@ -76,7 +71,6 @@ Router.route('/spravaOblasti/:_id', {
     }
 });
 
-//vsade bola infoOblast
 Router.route('/infoOblast/:_id', {
     template: 'infoArea',
     name: 'infoArea',

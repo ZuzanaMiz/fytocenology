@@ -1,11 +1,21 @@
-//my and public
-Meteor.publish('areas', function() {
-	return Areas.find();
+Meteor.publish('areas', function areasPublication() {
+    return Areas.find({
+        $or: [
+            {public: true},
+            {user: this.userId},
+        ],
+    });
 
 });
-//all
+
+
 Meteor.publish('habitats', function () {
-    return Habitats.find();
+    return Habitats.find({
+        $or: [
+            {user: "default"},
+            {user: this.userId},
+        ],
+    });
 });
 //in public and my areas
 Meteor.publish('photos', function () {
@@ -22,10 +32,16 @@ Meteor.publish('cardinals', function () {
 
 //only my and public
 Meteor.publish('reports', function () {
-	return Reports.find();
+    return Reports.find({
+        $or: [
+            {closed: true},
+            {userId: this.userId},
+        ],
+    });
 });
 //in my and default reports
 Meteor.publish('plants', function(){
+
 	return Plants.find();
 });
 
@@ -34,7 +50,7 @@ Meteor.publish('vegetacneStupne', function(){
 });
 
 Meteor.publish('savedAreas', function () {
-    return SavedAreas.find();
+    return SavedAreas.find({user: this.userId()});
 });
 
  Meteor.publish("userData", function () {

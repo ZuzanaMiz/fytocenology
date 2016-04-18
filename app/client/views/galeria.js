@@ -16,9 +16,15 @@ Template.galeria.events({
 
         Meteor.call("removePhoto", image);
     },
-    'submit .uploadPicture': function () {
-        var picture = pictureUpload.value;
-        // var picture=FileReader.readFile(picturePath);
+    'change .pictureUpload': function () {
+        var files = pictureUpload.value; // FileList object
+
+        // files is a FileList of File objects. List some properties.
+        var reader = new FileReader();
+        var picture = reader.readAsBinaryString(files);
+
+
+
         Meteor.call("savePhoto", picture, this._id);
 
         console.log("save " + picture);

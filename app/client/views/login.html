@@ -22,7 +22,7 @@
                     <div class="panel panel-primary text-center no-boder">
                         <div class="panel-body blue">
                             <h2><span class="glyphicon glyphicon-book"></span></h2>
-                            <h3>{{reportsCount}} záznamov </h3>
+                            <h3>{{reportsCount}} záznamy </h3>
                         </div>
                         <div class="panel-footer">
                             <span class="panel-eyecandy-title"> Ste vytvorili
@@ -43,9 +43,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="map-container">
+                    {{> googleMap name="map" options=mapOptions}}
+                </div>
             {{/if}}
         </div>
 
+
     </div>
+
 </template>
 

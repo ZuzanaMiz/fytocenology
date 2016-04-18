@@ -17,7 +17,7 @@ Template.editReport.helpers({
 });
 
 Template.editReport.events({
-    'click .takePhoto': function (event, template) {
+    'click .takePhoto': function (event) {
         var cameraOptions = {
             width: 800,
             height: 600
@@ -25,8 +25,6 @@ Template.editReport.events({
 
         MeteorCamera.getPicture(cameraOptions, function (error, data) {
             if (!error) {
-                //template.$('.photo').attr('src', data);
-                // Session.set('photo', data);
                 Meteor.call("savePhoto", data, Session.get("report"));
             }
         });
@@ -36,7 +34,7 @@ Template.editReport.events({
         Session.set("wantEditReport", true);
 
     },
-    'submit .edit-report': function (event, template) {
+    'submit .edit-report': function (event) {
         var cover = event.target.cover.value;
         Meteor.call("updateReportCover", this._id, cover);
         event.target.cover.value = "";

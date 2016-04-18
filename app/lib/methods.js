@@ -1,7 +1,18 @@
 Meteor.methods({
 
-    insertArea: function (naz, pop, sur1, sur2, high, exp, bio, user, size) {
 
+    insertArea: function (place, description, gps1, gps2, high, exposure, habitat, size) {
+        validate: new SimpleSchema({
+                place: {type: String},
+                description: {type: String},
+                gps1: {type: Array},
+                gps2: {type: Array},
+                high: {type: Number},
+                exposure: {type: String},
+                habitat: {type: String},
+                size: {type: Number},
+            }
+        ).validator(),
         Areas.insert({
             place: naz,
             description: pop,
@@ -10,7 +21,7 @@ Meteor.methods({
             high: high,
             exposure: exp,
             habitat: bio,
-            user: user,
+            user: Meteor.userId(),
             size: size
         });
     },
@@ -68,7 +79,7 @@ Meteor.methods({
     removePlant: function (id) {
 
     },
-    insertReport: function (cover, areaId, idUser, date) {
+    insertReport: function (cover, areaId, date) {
 
         Reports.insert({
 
@@ -76,7 +87,7 @@ Meteor.methods({
             date: date,
             areaId: areaId,
             closed: 'false',
-            userId: idUser
+            userId: Meteor.userId()
 
         });
     },
@@ -90,7 +101,16 @@ Meteor.methods({
         });
     },
 
-    insertHabitat: function (name, size, user) {
+    insertHabitat: function (name, size) {
+        Habitats.insert({
+            name: name,
+            size: size,
+            user: Meteor.userId(),
+
+        });
+
+    },
+    insertHabitatWithUID: function (name, size, user) {
         Habitats.insert({
             name: name,
             size: size,
@@ -99,8 +119,8 @@ Meteor.methods({
         });
 
     },
-    updateHabitat: function (name, size, user) {
-        Habitats.update({name: name, user: user}, {$set: {size: size}});
+    updateHabitat: function (name, size) {
+        Habitats.update({name: name, user: Meteor.userId()}, {$set: {size: size}});
 
     },
 
@@ -121,28 +141,27 @@ Meteor.methods({
     },
 
 
-    insertUserSettings: function (user, showCover, degrees) {
+    insertUserSettings: function (showCover, degrees) {
         UserSettings.insert({user: Meteor.userId(), cover: showCover, degrees: degrees});
 
     },
-    updateUserSettings: function (user, showCover, degrees) {
+    updateUserSettings: function (showCover, degrees) {
         UserSettings.update({user: Meteor.userId()}, {$set: {cover: showCover, degrees: degrees}});
     },
     updateAreaPublic: function (id, isPublic) {
         Areas.update({_id: id}, {$set: {public: isPublic}});
     },
-    insertSavedArea: function (idUser, idArea) {
-        SavedAreas.insert({user: idUser, area: idArea});
+    insertSavedArea: function (idArea) {
+        SavedAreas.insert({user: Meteor.userId(), area: idArea});
     },
-    removeSavedArea: function (idUser, idArea) {
-        SavedAreas.remove({user: idUser, area: idArea});
+    removeSavedArea: function (idArea) {
+        SavedAreas.remove({user: Meteor.userId(), area: idArea});
     },
 
     removePhoto: function (id) {
         Photos.remove({_id: id});
     },
     getExposition: function (degrees) {
-        console.log("parsing");
         return Cardinals.findOne({degree: degrees}).name;
     }
 });

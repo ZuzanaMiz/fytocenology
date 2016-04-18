@@ -30,19 +30,17 @@ Template.addArea.events({
         var sur2 = event.target.gps2.value;
         var size = event.target.sizeHab.value;
         var name = event.target.place.value;
-        var user = Meteor.userId();
         var bio = habitatSelect.value;
         var exp = cardinalSelect.value;
         var desc = event.target.description.value;
 
-        console.log("adding area");
-        if (Session.get("gps1") != null) {
-            gps1 = Session.get("gps1");
+        if (Session.get("gps1") !== null || Session.get("gps1") !== undefined) {
+            sur1 = Session.get("gps1");
         }
-        if (Session.get("gps2") != null) {
-            gps2 = Session.get("gps2");
+        if (Session.get("gps2") !== null || Session.get("gps1") !== undefined) {
+            sur2 = Session.get("gps2");
         }
-        Meteor.call("insertArea", name, desc, sur1, sur2, altitude, exp, bio, user, size);
+        Meteor.call("insertArea", name, desc, sur1, sur2, altitude, exp, bio, size);
         event.target.description.value = "";
         event.target.high.value = "";
         event.target.gps1.value = "";
@@ -78,15 +76,15 @@ Template.addArea.events({
         var position = Geolocation.currentLocation();
         var value = "v:" + position.coords.latitude + " s:" + position.coords.longitude;
         gps1.value = value;
-        high.value = position.altitude;
-        Session.set("gps1", position);
+        high.value = position.coords.altitude;
+        Session.set("gps1", [position.coords.latitude, position.coords.longitude]);
 
     },
 
     'click .GPS2': function (event, template) {
         var position2 = Geolocation.currentLocation();
         var value = "v:" + position2.coords.latitude + " s:" + position2.coords.longitude;
-        Session.set("gps2", position2);
+        Session.set("gps2", [position2.coords.latitude, position2.coords.longitude]);
 
         gps2.value = value;
         high.value = position2.coords.altitude;
@@ -135,8 +133,10 @@ Template.map.onCreated(function () {
             if (!marker) {
                 marker = new google.maps.Marker({
                     position: new google.maps.LatLng(latLng.lat, latLng.lng),
-                    map: map.instance
+                    map: map.instance,
                 });
+                gps1.value = latLng.lat;
+
             }
             // The marker already exists, so we'll just change its position.
             else {
@@ -148,4 +148,5 @@ Template.map.onCreated(function () {
             map.instance.setZoom(MAP_ZOOM);
         });
     });
+
 });

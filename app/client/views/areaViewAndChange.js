@@ -1,9 +1,8 @@
 Session.setDefault("areaViewAndChange", false);
-//Session.setDefault("wantAdd", "no");
 
 
 Template.areaViewAndChange.helpers({
-    wantAdd: function (wantAddArea) {
+    wantAdd: function () {
 
         return Session.get('wantAddReport') == "yes";
     },
@@ -13,7 +12,7 @@ Template.areaViewAndChange.helpers({
 });
 
 Template.changeButton.events({
-    'click .addNew': function (event) {
+    'click .addNew': function () {
         Session.set('wantAddArea', "yes");
 
     },
@@ -31,7 +30,7 @@ Template.addReport.events({
         var cover = event.target.cover.value;
         var idArea = Session.get("Area");
         Session.set('wantAddReport', "no");
-        Meteor.call("insertReport", cover, idArea, Meteor.userId(), new Date());
+        Meteor.call("insertReport", cover, idArea, new Date());
         event.target.cover.value = "";
         return false;
     }

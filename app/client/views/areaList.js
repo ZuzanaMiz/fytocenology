@@ -25,7 +25,13 @@ Template.area_list.events({
 
 
 });
+Template.area.onCreated(function () {
+    if (this.gps1 !== undefined && this.gps1.typeof(Object)) {
+        var long = this.gps1.longitude;
+        this.gps1 = long;
+    }
 
+});
 Template.area.helpers({
         "userIsOwner": function () {
             console.log(Areas.findOne({_id: this._id}).user === Meteor.userId());
@@ -35,7 +41,9 @@ Template.area.helpers({
         "saved": function () {
             var exist = SavedAreas.findOne({user: Meteor.userId(), area: this._id});
             return exist != null;
-        }
+        },
+
+
     }
 );
 Template.area.events({

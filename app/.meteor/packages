@@ -27,6 +27,7 @@ mdg:camera
 mrt:moment
 ground:db
 appcache
+chriswessels:glyphicons-halflings
 mdg:geolocation
 dburles:google-maps
 mrt:bootstrap-image-gallery
@@ -35,3 +36,5 @@ standard-minifier-css
 standard-minifier-js
 okgrow:image-upload
 u2622:persistent-session
+mdg:validated-method
+aldeed:simple-schema
