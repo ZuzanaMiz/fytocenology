@@ -47,12 +47,21 @@ Router.route('/nastavenia', {
     data: function () {
 
         return UserSettings.find({user: Meteor.userId()});
+    },
+
+    onRun: function() {
+        Session.set("selectedItem", "settings");
     }
 });
 
 Router.route('/zoznamOblasti', {
     template: 'area_list',
-    name: 'area_list'
+    name: 'area_list',
+
+    onRun: function() {
+        Session.set("selectedItem", "areaList");
+    }
+
 });
 
 
