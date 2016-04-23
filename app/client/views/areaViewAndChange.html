@@ -12,6 +12,7 @@
         {{/if}}
     </div>
 </template>
+
 <template name="infoArea">
 
     <div class="row">
@@ -33,12 +34,14 @@
                             </button>
                         {{/if}}
                     </h2>
-                    it
                     <p>{{description}} <br>
-                        <label>Zemepisná šírka:</label> {{gps1}}<br>
-                        <label>Zemepisná výška : </label> {{gps2}} <br>
+                        <label>Biotop:</label> {{habitat}}<br>
+                        <label>Súradnica 1:</label> {{gps1}}<br>
+                        <label>Súradnica 2 : </label> {{gps2}} <br>
                         <label>Nadmorská výška:</label>{{high}}<br>
+                        <label>Rozmer oblasti:</label> {{size}}<br>
                         <label>Expozícia:</label>{{exposure}}<br>
+                        <label> Autor: </label> {{user}}
 
 
                     </p>

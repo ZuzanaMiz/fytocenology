@@ -19,22 +19,19 @@ accounts-password
 ian:accounts-ui-bootstrap-3
 iron:router
 twbs:bootstrap
-accounts-facebook
-accounts-google
 service-configuration
 meteortoys:allthings	#for development 
 mdg:camera
 mrt:moment
 ground:db
 appcache
-chriswessels:glyphicons-halflings
 mdg:geolocation
 dburles:google-maps
 mrt:bootstrap-image-gallery
-mikael:accounts-merge
 standard-minifier-css
 standard-minifier-js
 okgrow:image-upload
 u2622:persistent-session
 mdg:validated-method
 aldeed:simple-schema
+matb33:bootstrap-glyphicons

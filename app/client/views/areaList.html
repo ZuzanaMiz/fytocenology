@@ -1,17 +1,14 @@
 <template name="area_list">
     <!--  page-wrapper -->
-
-
     <div id="page-wrapper">
-
         <div class="row">
             <!-- Page Header -->
             <div class="col-lg-12">
                 <h1 class="page-header">
-                    <button type="button" style="float:right;" class="btn btn-success btn-circle ">
+                    <button type="button" style="float:right;" class="btn btn-success btn-circle">
                         <a href="/pridajOblast"> <span class="glyphicon glyphicon-plus"></span></a>
                     </button>
-                    Oblast
+                    Zoznam oblastí
                 </h1>
             </div>
             <!--End Page Header -->
@@ -20,19 +17,27 @@
             <div class="col-lg-12">
                 <!-- Advanced Tables -->
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Zoznam oblastí
-                    </div>
+
                     <div class="panel-body">
                         <form>
-
-
-                            <input type="textField" value="Zadaj nazov obce">
+                            <div class="col-lg-3">
+                                <input type="textField" class="form-control" placeholder="Zadaj lokalitu">
+                            </div>
 
                             <button type="button" class="btn btn-default search" aria-label="Left Align">
                                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             </button>
+                            {{#if generatorMode true}}
+                                <br> Vyberte oblasti a ich záznamy, ktoré budú vygenerované <br>
+                                Ak pole necháte prázdne nevygeneruje sa žiaden záznam z danej oblasti
+                                <button type="button" class="btn btn-info generate">Generuj</button>
+
+                            {{else}}
+                                <button type="button" class="btn btn-warning createGeneratorMode">Textový výstup
+                                </button>
+                            {{/if}}
                         </form>
+                        s
                         <label class="onlyMy">
                             <input type="checkbox" checked="{{onlyMyActual}}">
                             Moje oblasti
@@ -44,9 +49,13 @@
                                     <th>Lokalita</th>
                                     <th>Súradnice</th>
                                     <th>Autor</th>
-                                    <th>Uložiť <span class="glyphicon glyphicon-pushpin"> </span></th>
-                                    <th>Zverejniť <span class="glyphicon glyphicon-cloud-upload"></span></th>
+                                    {{#if generatorMode true}}
+                                        <th> Záznamy</th>
 
+                                    {{else}}
+                                        <th>Uložiť <span class="glyphicon glyphicon-pushpin"> </span></th>
+                                    <th>Zverejniť <span class="glyphicon glyphicon-cloud-upload"></span></th>
+                                    {{/if}}
 
                                 </tr>
                                 </thead>
@@ -66,7 +75,21 @@
                 <!--End Advanced Tables -->
             </div>
         </div>
+        <div class="row">
+<textarea class="form-control" rows=10 id="output_txt" width="100" height="50">
+</textarea>
+        </div>
+        <div class="row">
 
+            <textarea class="form-control" rows=10 id="output_str" width="50" height="50">
+</textarea>
+            <textarea class="form-control" rows=10 id="output_tab" width="20" height="50">
+</textarea>
+        </div>
+        <div class="row">
+<textarea class="form-control" rows=10 id="output_exp" width="100" height="50">
+</textarea>
+        </div>
 
     </div>
     <!-- end page-wrapper -->
@@ -80,11 +103,8 @@
             <label>Zemepisná výška : </label> {{areaGps2}} <br>
             <label>Nadmorská výška:</label>{{areaHigh}}<br>
             <label>Expozícia:</label>{{areaExposure}}<br>
-
-
         </p>
     </div>
-
 </template>
 
 
@@ -94,13 +114,27 @@
         <td class="center"><a href="/spravaOblasti/{{_id}}"> {{place}}</a></td>
         <td class="center">{{gps1}}</td>
         <td class="center">{{user}}</td>
+        {{#if generatorMode true}}
+
+            <select class="form-control report_for_generate" name="generator_select">
+                {{#each reportsForGenerator}}
+                    <option value=""></option>
+
+                    {{>report_for_generator}}
+                {{/each}}
+            </select>
+        {{else}}
         <td class="center"><input type="checkbox" class="isSaved" checked={{saved}}></td>
         {{#if userIsOwner 'true'}}
             <td class="center"><input type="checkbox" class="isPublic" checked={{public}}></td>
         {{else}}
             <td class="center"><span class="glyphicon glyphicon-lock"></span></td>
         {{/if}}
+        {{/if}}
     </tr>
 </template>
+<template name="report_for_generator">
+    <option value={{_id}}> {{localizedDateAndTime date}}</option>
 
+</template>
 

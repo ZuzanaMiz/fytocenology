@@ -73,7 +73,7 @@ Template.addArea.events({
         }
     },
     'click .GPS1': function (event, template) {
-        var position = Geolocation.currentLocation();
+        var position = Geolocation.currentLocation();//
         var value = "v:" + position.coords.latitude + " s:" + position.coords.longitude;
         gps1.value = value;
         high.value = position.coords.altitude;
@@ -84,7 +84,8 @@ Template.addArea.events({
     'click .GPS2': function (event, template) {
         var position2 = Geolocation.currentLocation();
         var value = "v:" + position2.coords.latitude + " s:" + position2.coords.longitude;
-        Session.set("gps2", [position2.coords.latitude, position2.coords.longitude]);
+        Session.set("gps2", jQuery.extend(true, {}, position2.coords));
+// [position2.coords.latitude, position2.coords.longitude]);
 
         gps2.value = value;
         high.value = position2.coords.altitude;

@@ -2,7 +2,7 @@ Meteor.methods({
 
 
     insertArea: function (place, description, gps1, gps2, high, exposure, habitat, size) {
-        validate: new SimpleSchema({
+        /*    validate: new SimpleSchema({
                 place: {type: String},
                 description: {type: String},
                 gps1: {type: Array},
@@ -12,15 +12,15 @@ Meteor.methods({
                 habitat: {type: String},
                 size: {type: Number},
             }
-        ).validator(),
+         ).validator(),*/
         Areas.insert({
-            place: naz,
-            description: pop,
-            gps1: sur1,
-            gps2: sur2,
+            place: place,
+            description: description,
+            gps1: gps1,
+            gps2: gps2,
             high: high,
-            exposure: exp,
-            habitat: bio,
+            exposure: exposure,
+            habitat: habitat,
             user: Meteor.userId(),
             size: size
         });

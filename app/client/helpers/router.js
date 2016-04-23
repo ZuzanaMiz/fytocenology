@@ -1,7 +1,5 @@
 Router.configure({
     layoutTemplate: 'main'
-
-
 });
 
 Router.onBeforeAction(function () {
@@ -17,11 +15,16 @@ Router.onBeforeAction(function () {
         this.next();
     }
 });
+
 Router.route('/', {
     template: 'login',
     name: 'login',
-    layoutTemplate: 'main'
 
+    //
+    onRun: function () {
+        Session.set("selectedItem", "home");
+        this.next();
+    }
 });
 
 
@@ -45,12 +48,12 @@ Router.route('/nastavenia', {
     name: 'settings',
 
     data: function () {
-
         return UserSettings.find({user: Meteor.userId()});
     },
 
     onRun: function() {
         Session.set("selectedItem", "settings");
+        this.next();
     }
 });
 
@@ -60,6 +63,7 @@ Router.route('/zoznamOblasti', {
 
     onRun: function() {
         Session.set("selectedItem", "areaList");
+        this.next();
     }
 
 });

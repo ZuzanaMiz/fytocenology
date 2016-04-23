@@ -12,14 +12,14 @@ App.launchScreens({
   'ipad_portrait': 'public/Default-Portrait-ipad.png',
   'ipad_portrait_2x':'public/Default-Portrait@2x-ipad.png'
 });*/
-App.info({
+/*App.info({
   id: 'com.example.app',
   name: 'Fytocenology',
   description: 'Diplomova praca',
   author: 'Bc. Zuzana Mizakova',
   email: 'mizakova.zuzana@gmail.com',
-  
-});
+
+ });*/
 
 /*App.icons({
 'android_hdpi':'android/android_hdpi/ic_launcher.png',
@@ -35,7 +35,7 @@ App.setPreference('Orientation', 'landscape');
 App.setPreference('DisallowOverscroll', true);
 App.setPreference('BackupWebStorage', 'none');
 App.setPreference('SuppressesIncrementalRendering', true);
-*/
+
 App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
-App.accessRule('*.gstatic.com/*');
+ App.accessRule('*.gstatic.com/*');*/
