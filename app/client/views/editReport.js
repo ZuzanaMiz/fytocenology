@@ -25,7 +25,7 @@ Template.editReport.events({
 
         MeteorCamera.getPicture(cameraOptions, function (error, data) {
             if (!error) {
-                Meteor.call("savePhoto", data, Session.get("report"));
+                Meteor.call("savePhoto", data, Session.get("report"), Session.get("Area"));
             }
         });
         event.preventDefault();
