@@ -18,7 +18,8 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 accounts-password
 ian:accounts-ui-bootstrap-3
 iron:router
-twbs:bootstrap
+#twbs:bootstrap
+matb33:bootstrap-full
 service-configuration
 meteortoys:allthings	#for development 
 mdg:camera
