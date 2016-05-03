@@ -4,7 +4,6 @@ Template.galeria.helpers({
 
         return Photos.find({idReport: Session.get("report")});
     }
-
 });
 
 Template.galeria.events({

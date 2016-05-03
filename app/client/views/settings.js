@@ -1,18 +1,20 @@
 Template.setSettings.events({
-    'submit .settings_form': function (event, template) {
+    'click .settings_save': function (event, template) {
 
         var degrees = formatExpozicieSelect.value;
         var showCover = formatPokryvnostiSelect.value;
         var actualSettings = UserSettings.findOne({user: Meteor.userId()});
         var rows = $('#habitat_table').find('tr:not(:hidden)');
+        console.log($(rows.get(1)).find('td'));
 
-        rows.each(function () {
-            console.log(this);
-            var elements = $(this).find('td');
-            console.log(elements);
-            var habitat = elements[0];
-            var number = elements[1];
+
+        var i;
+        for (i = 1; i < rows.size(); i++) {
+            var cells = $(rows.get(i)).find('td');
+            var habitat = $(cells.get(0)).text();
+            var number = $(cells.get(1)).text();
             console.log(habitat);
+            console.log(cells);
             var actHabit = Habitats.findOne({user: Meteor.userId(), name: habitat});
 
             if (actHabit === null || actHabit === undefined) {
@@ -20,29 +22,7 @@ Template.setSettings.events({
             } else {
                 Meteor.call("updateHabitat", habitat, number);
             }
-
-        });
-
-
-        /* var i, j, cells, habitat, value;
-
-         for (i = 0, j = rows.length; i < j; ++i) {
-         cells = rows[i].getElementsByTagName('td');
-         if (!cells.length) {
-         continue;
-         }
-         habitat = cells[0];
-         console.log(habitat);
-         value = cells[1];
-         */
-
-            var actHabit = Habitats.findOne({user: Meteor.userId(), name: habitat});
-            if (actHabit === null || actHabit === undefined) {
-                Meteor.call("insertHabitat", habitat, value);
-            } else {
-                Meteor.call("updateHabitat", habitat, value);
-            }
-        //   }
+        }
         if (actualSettings === null || actualSettings === undefined) {
 
             Meteor.call("insertUserSettings", showCover, degrees);
@@ -93,7 +73,11 @@ Template.actualSettings.helpers({
 });
 Template.habitats.helpers({
     'habitats': function () {
-        return Habitats.find();
+        if (Habitats.find({user: Meteor.userId()}).count() > 0) {
+            return Habitats.find({user: Meteor.userId()});
+        } else {
+            return Habitats.find({user: "undefined"});
+        }
     },
     'settings_view_is_change': function () {
         return Session.get("settings_view") == "change";

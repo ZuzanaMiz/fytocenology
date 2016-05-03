@@ -38,7 +38,7 @@
 
 
 
-                    {{#if isClosed 'false'}}
+                    {{#if isClosed false}}
                         <button type="button" class="btn btn-default takePhoto">
                             <span class="glyphicon glyphicon-camera"></span>Fotografia
                         </button>
@@ -90,8 +90,9 @@
                                     {{>plant}}
                                 {{/each}}
 
-                                {{#if isClosed 'false'}}
-                                    {{#if existEdit undefined}}
+                                {{#if isClosed false}}
+                                    {{#if existEdit false}}
+
                                         {{>addPlantRow}}
                                     {{/if}}
                                 {{/if}}

@@ -60,7 +60,6 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form class="settings_form">
                                 <div class="form-group">
                                     <label>Druh stupnice</label>
 
@@ -68,7 +67,7 @@
                                             id="formatPokryvnostiSelect">
                                         <option value="Braun-Blanquet"> Braun-Blanquet</option>
                                         <option value="Van der Maarel"> Van der Maarel</option>
-                                        <option vaue="OBR"> Obrázky</option>
+                                        <option value="OBR"> Obrázky</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -85,8 +84,7 @@
                                 </div>
 
                                 <button type="button" class="btn btn-primary defaultValues">Pôvodné nastavenia</button>
-                                <button type="submit" class="btn btn-success">Uložiť</button>
-                            </form>
+                            <button type="button" class="btn btn-success settings_save">Uložiť</button>
                         </div>
                     </div>
                 </div>
@@ -98,14 +96,14 @@
 <template name="habitatRow">
     <tr>
         <td>{{name}}</td>
-        <td>{{size}}</td>
+        <td id= {{name}}>{{size}}</td>
     </tr>
 </template>
 
 
 <template name="habitatEditable">
     <tr>
-        <td contenteditable='true'>{{name}}</td>
+        <td>{{name}}</td>
         <td contenteditable='true'>{{size}}</td>
     </tr>
 </template>

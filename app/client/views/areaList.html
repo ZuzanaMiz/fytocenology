@@ -99,8 +99,8 @@
     <div class="panel-body green">
         <h2>{{areaPlace}}</h2>
         <p>{{areaDescription}} <br>
-            <label>Zemepisná šírka:</label> {{areaGps1}}<br>
-            <label>Zemepisná výška : </label> {{areaGps2}} <br>
+            <label>Súradnica 1:</label> {{gps1.latitude}},  {{gps1.longitude}}<br>
+            <label>Súradnica 2 : </label> {{gps2.latitude}},  {{gps2.longitude}}<br>
             <label>Nadmorská výška:</label>{{areaHigh}}<br>
             <label>Expozícia:</label>{{areaExposure}}<br>
         </p>
@@ -112,8 +112,8 @@
 
     <tr class="gradeA">
         <td class="center"><a href="/spravaOblasti/{{_id}}"> {{place}}</a></td>
-        <td class="center">{{gps1}}</td>
-        <td class="center">{{user}}</td>
+        <td class="center">{{gps1.latitude}},  {{gps1.longitude}} </td>
+        <td class="center">{{user_name}}</td>
         {{#if generatorMode true}}
 
             <select class="form-control report_for_generate" name="generator_select">

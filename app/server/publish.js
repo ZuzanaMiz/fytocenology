@@ -10,12 +10,14 @@ Meteor.publish('areas', function areasPublication() {
 
 
 Meteor.publish('habitats', function () {
-    return Habitats.find({
-        $or: [
-            {user: "default"},
-            {user: this.userId},
-        ],
-    });
+    return Habitats.find(
+        //{
+        //  $or: [
+        //    {user: "default"},
+        //  {user: this.userId},
+        // ],
+        //}
+    );
 });
 //in public and my areas
 Meteor.publish('photos', function () {
@@ -44,13 +46,17 @@ Meteor.publish('plants', function(){
 
 	return Plants.find();
 });
+Meteor.publish('users', function () {
+    return Users.find();
+})
+
 
 Meteor.publish('vegetacneStupne', function(){
 	return VegetationZone.find();
 });
 
 Meteor.publish('savedAreas', function () {
-    return SavedAreas.find({user: this.userId()});
+    return SavedAreas.find({user: this.userId});
 });
 
  Meteor.publish("userData", function () {

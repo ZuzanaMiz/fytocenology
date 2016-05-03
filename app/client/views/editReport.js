@@ -1,7 +1,7 @@
 Template.editReport.helpers({
     isClosed: function () {
 
-        return (Reports.findOne(({_id: Session.get('report')})).closed) == 'false';
+        return (Reports.findOne(({_id: Session.get('report')})).closed) === false;
     },
     wantEditReport: function (wantEditReport) {
         return Session.get("wantEditReport") === true;
@@ -11,7 +11,7 @@ Template.editReport.helpers({
     },
     canEdit: function () {
         var report = Reports.findOne({_id: this._id});
-        return (report.userId === Meteor.userId() && report.closed === false)
+        return (report.userId == Meteor.userId() && report.closed == false)
             && (Session.get("wantEditReport") === null || Session.get("wantEditReport") !== true);
     }
 });
@@ -51,10 +51,15 @@ Template.tablePlants.helpers({
         return Plants.find({reportId: idz});
     },
     isClosed: function () {
-        return (Reports.findOne(({_id: Session.get('report')})).closed) == 'false';
+        return (Reports.findOne(({_id: Session.get('report')})).closed) === false;
     },
     existEdit: function () {
-        return Session.get('editedPlant') == undefined;
+        if (Session.get('editedPlant') === undefined || Session.get('editedPlant') === null) {
+            console.log(Session.get('editedPlant'));
+            return false;
+        }
+        ;
+        return true;
     },
 });
 Template.plant.events({

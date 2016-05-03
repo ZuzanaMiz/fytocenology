@@ -26,21 +26,21 @@ Template.addArea.events({
     "submit .new-area": function (event) {
 
         var altitude = event.target.high.value;
-        var sur1 = event.target.gps1.value;
-        var sur2 = event.target.gps2.value;
-        var size = event.target.sizeHab.value;
+        var gps1 = event.target.gps1.value;
+        var gps2 = event.target.gps2.value;
         var name = event.target.place.value;
         var bio = habitatSelect.value;
         var exp = cardinalSelect.value;
         var desc = event.target.description.value;
+        var size = event.target.sizeHab.value;
 
         if (Session.get("gps1") !== null || Session.get("gps1") !== undefined) {
-            sur1 = Session.get("gps1");
+            gps1 = Session.get("gps1");
         }
         if (Session.get("gps2") !== null || Session.get("gps1") !== undefined) {
-            sur2 = Session.get("gps2");
+            gps2 = Session.get("gps2");
         }
-        Meteor.call("insertArea", name, desc, sur1, sur2, altitude, exp, bio, size);
+        Meteor.call("insertArea", name, desc, gps1, gps2, altitude, exp, bio, size);
         event.target.description.value = "";
         event.target.high.value = "";
         event.target.gps1.value = "";
@@ -49,8 +49,8 @@ Template.addArea.events({
         event.target.place.value = "";
 
 
-        sur1 = "";
-        sur2 = "";
+        gps1 = "";
+        gps2 = "";
         desc = "";
         altitude = "";
         bio = "";
@@ -77,7 +77,7 @@ Template.addArea.events({
         var value = "v:" + position.coords.latitude + " s:" + position.coords.longitude;
         gps1.value = value;
         high.value = position.coords.altitude;
-        Session.set("gps1", [position.coords.latitude, position.coords.longitude]);
+        Session.set("gps1", jQuery.extend(true, {}, position.coords));
 
     },
 
@@ -85,7 +85,6 @@ Template.addArea.events({
         var position2 = Geolocation.currentLocation();
         var value = "v:" + position2.coords.latitude + " s:" + position2.coords.longitude;
         Session.set("gps2", jQuery.extend(true, {}, position2.coords));
-// [position2.coords.latitude, position2.coords.longitude]);
 
         gps2.value = value;
         high.value = position2.coords.altitude;

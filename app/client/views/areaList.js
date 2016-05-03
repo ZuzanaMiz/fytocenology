@@ -122,33 +122,43 @@ Template.area.helpers({
         console.log(Areas.findOne({_id: this._id}).user === Meteor.userId());
         return Areas.findOne({_id: this._id}).user === Meteor.userId();
     },
-
     "saved": function () {
         var exist = SavedAreas.findOne({user: Meteor.userId(), area: this._id});
-        return exist != null;
+        if (exist === null || exist === undefined) {
+            return false;
+        }
+        return true;
     },
-    "generatorMode": function () {
+    'generatorMode': function () {
         return Session.get("generatorMode") === true;
     },
-    reportsForGenerator: function () {
+    "reportsForGenerator": function () {
         return Reports.find({areaId: this._id, closed: "true"});
+    },
+    "user_name": function () {
+        if (this.user === Meteor.userId()) {
+            return "ja";
+        }
+        else {
+            return this.user;
     }
-
+    }
 });
 Template.area.events({
     "change .isPublic": function () {
         Meteor.call("updateAreaPublic", this._id, event.target.checked);
 
     },
+
+
     "change .isSaved": function () {
         var save = event.target.checked;
         if (save === true) {
-            Meteor.call("insertSavedArea", Meteor.userId(), this._id);
+            Meteor.call("insertSavedArea", this._id);
         } else {
-            Meteor.call("removeSavedArea", Meteor.userId(), this._id);
+            Meteor.call("removeSavedArea", this._id);
         }
-    },
+    }
 
 
 });
-

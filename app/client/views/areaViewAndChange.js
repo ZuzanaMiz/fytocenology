@@ -71,5 +71,8 @@ Template.infoArea.helpers({
         var owner = currentArea.user;
         var isPublic = currentArea.public;
         return owner === Meteor.userId() && !isPublic;
+    },
+    habitat_name: function () {
+        return Habitats.findOne({_id: this.habitat}).name;
     }
 });
