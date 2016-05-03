@@ -95,13 +95,15 @@ Template.plant.helpers({
 });
 Template.tablePlants.events({
     'submit .add-plant': function (event) {
-        var name = event.target.name.value;
-        var degree = event.target.degree.value;
-        var vital = event.target.vitality.value;
-        var sociability = event.target.sociability.value;
-        var id = Session.get("report");
+        var plant = {
+            name: event.target.name.value,
+            degree: parseInt(event.target.degree.value),
+            vitality: parseInt(event.target.vitality.value),
+            sociability: parseInt(event.target.sociability.value),
+            reportId: Session.get("report")
+        };
 
-        Meteor.call("insertPlant", name, degree, vital, sociability, id);
+        Meteor.call('Plants.insert', plant);
 
         event.target.name.value = "";
         event.target.degree.value = "";

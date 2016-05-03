@@ -1,57 +1,29 @@
-/* GPS = new SimpleSchema({
-
- latitude: {type:String},
- longitude: {type:String},
- altitude:{type:String},
- accuracy:{type:String},
- altitudeAccuracy:{type:String},
- heading: {type:String},
- speed: {type:String}});
-
- Report = new SimpleSchema({
- cover: {type:Number},
- date: {type:Date},
- areaId:{type:String},
- closed: {type:Boolean},
- userId: {type:String}
- });
- Plant = new SimpleSchema({
- name: {type:String},
- degree: {type:Number},
- vitality:{type:String},
- sociability: {type:Number},
- reportId: {type:String},
- vegetationDegree:{type:String}
- });
- area = new SimpleSchema({
- place: {type: String},
- description: {type: String},
- gps1:{Object},
- gps2:{Object},
- high: {type: Number},
- exposure: {type: String},
- habitat: {type: String},
- size: {type: Number},
- user: {type:id}});
- */
-Meteor.methods({
-    'insertArea' (place, description, gps1, gps2, high, exposure, habitat, size){
-        // area.validate({place, description,  high, exposure, habitat, size});
-        Areas.insert({
-            place: place,
-            description: description,
-            gps1: gps1,
-            gps2: gps2,
-            high: high,
-            exposure: exposure,
-            habitat: habitat,
-            user: Meteor.userId(),
-            size: size
-        });
+export const plantsInsert = new ValidatedMethod({
+    name: 'Plants.insert',
+    validate: new SimpleSchema({
+        name: {type: String},
+        degree: {type: Number},
+        vitality: {type: Number},
+        sociability: {type: Number},
+        reportId: {type: String, regEx: SimpleSchema.RegEx.Id}
+    }).validator(),
+    applyOptions: {
+        clean: true,
     },
+    run(newPlant) {
+        if (!this.userId) {
+            throw new Meteor.Error('Invoices.methods.insert.not-logged-in',
+                'Must be logged in to create an invoice.');
+        }
+
+        Plants.insert(newPlant)
+    }
+});
+
+Meteor.methods({
 
 
-    /*insertArea: function (place, description, gps1, gps2, high, exposure, habitat, size) {
+    insertArea: function (place, description, gps1, gps2, high, exposure, habitat, size) {
         /*    validate: new SimpleSchema({
                 place: {type: String},
                 description: {type: String},
@@ -62,7 +34,7 @@ Meteor.methods({
                 habitat: {type: String},
                 size: {type: Number},
             }
-     ).validator(),
+         ).validator(),*/
         Areas.insert({
             place: place,
             description: description,
@@ -75,7 +47,6 @@ Meteor.methods({
             size: size
         });
     },
-     */
 
     updateArea: function (id, name, desc, gps1, gps2, altitude, exp, bio, size) {
 
@@ -111,16 +82,6 @@ Meteor.methods({
         Reports.remove({_id: id});
     },
 
-    insertPlant: function (name, degree, vital, sociability, id) {
-
-        Plants.insert({
-            name: name,
-            degree: degree,
-            vitality: vital,
-            sociability: sociability,
-            reportId: id
-        });
-    },
     updatePlant: function (plantId, name, degree, vital, sociability) {
 
         Plants.update({_id: plantId}, {$set: {name: name, degree: degree, vitality: vital, sociability: sociability}});
@@ -131,16 +92,14 @@ Meteor.methods({
 
     },
     insertReport: function (cover, areaId, date) {
-        var closed = false;
-        var userId = Meteor.userId();
 
         Reports.insert({
 
             cover: cover,
             date: date,
             areaId: areaId,
-            closed: closed,
-            userId: userId
+            closed: 'false',
+            userId: Meteor.userId()
 
         });
     },

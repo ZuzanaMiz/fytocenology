@@ -10,3 +10,13 @@ Photos = new Mongo.Collection('photos');
 SavedAreas = new Mongo.Collection('savedAreas');
 //Users = new Mongo.Collection('users');
 
+Plants.schema = new SimpleSchema({
+    name: {type: String},
+    degree: {type: Number},
+    vitality: {type: Number},
+    sociability: {type: Number},
+    reportId: {type: String, regEx: SimpleSchema.RegEx.Id}
+});
+
+Plants.attachSchema(Plants.schema);
+
