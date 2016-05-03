@@ -1,3 +1,25 @@
+export const plantsInsert = new ValidatedMethod({
+    name: 'Plants.insert',
+    validate: new SimpleSchema({
+        name: {type: String},
+        degree: {type: Number},
+        vitality: {type: Number},
+        sociability: {type: Number},
+        reportId: {type: String, regEx: SimpleSchema.RegEx.Id}
+    }).validator(),
+    applyOptions: {
+        clean: true,
+    },
+    run(newPlant) {
+        if (!this.userId) {
+            throw new Meteor.Error('Invoices.methods.insert.not-logged-in',
+                'Must be logged in to create an invoice.');
+        }
+
+        Plants.insert(newPlant)
+    }
+});
+
 Meteor.methods({
 
 
@@ -61,15 +83,6 @@ Meteor.methods({
         Reports.remove({_id: id});
     },
 
-    insertPlant: function (name, degree, vital, sociability, id) {
-        Plants.insert({
-            name: name,
-            degree: degree,
-            vitality: vital,
-            sociability: sociability,
-            reportId: id
-        });
-    },
     updatePlant: function (plantId, name, degree, vital, sociability) {
 
         Plants.update({_id: plantId}, {$set: {name: name, degree: degree, vitality: vital, sociability: sociability}});
