@@ -91,10 +91,8 @@
                                 {{/each}}
 
                                 {{#if isClosed false}}
-                                    {{#if existEdit false}}
 
                                         {{>addPlantRow}}
-                                    {{/if}}
                                 {{/if}}
                                 </tbody>
                             </table>
@@ -128,7 +126,7 @@
             </td>
 
             <td class="center">
-                zatial nic
+                {{>vegetation_degree_combo}}
             </td>
             <td class="center">
                 <button type="button" class="btn btn-success btn-circle savePlant">
@@ -142,7 +140,7 @@
             <td class="center"> {{degree}}        </td>
             <td class="center"> {{sociability}} </td>
             <td class="center"> {{vitality}}    </td>
-            <td class="center"> {{vegDegree}}   </td>
+            <td class="center"> {{vegetation_degree}}   </td>
             <td class=center>
                 <button type="button" class="editPlant" name="editPlant"><span
                         class="glyphicon glyphicon-pencil"></span></button>
@@ -175,8 +173,7 @@
             <input type="number" class="form-control" name="vitality" min="1" max="4">
         </td>
         <td class="center">
-            zatial nic
-        </td>
+            {{>vegetation_degree_combo}}        </td>
         <td class="center">
             <button type="submit" class="btn btn-success btn-circle">
                 <span class="glyphicon glyphicon-check"></span>
@@ -191,6 +188,7 @@
 
 <template name="BBcover">
     <select name="degree" class="form-control">
+        <option value=""></option>
         <option value="1"> r</option>
         <option value="2"> +</option>
         <option value="3"> 1</option>
@@ -202,4 +200,19 @@
         <option value="9"> 5</option>
     </select>
 </template>
+
+
+<template name="vegetation_degree_combo">
+    <select name="vegetation_degree" class="form-control">
+        <option value=""></option>
+        <option value="juvenilne"> juvenilne</option>
+        <option value="mach"> mach</option>
+        <option value="bylina"> bylina</option>
+        <option value="ker"> ker</option>
+        <option value="drevina"> drevina</option>
+        <option value="semienko"> semienko</option>
+
+    </select>
+</template>
+
 

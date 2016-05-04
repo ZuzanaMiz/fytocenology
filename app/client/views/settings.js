@@ -76,7 +76,7 @@ Template.habitats.helpers({
         if (Habitats.find({user: Meteor.userId()}).count() > 0) {
             return Habitats.find({user: Meteor.userId()});
         } else {
-            return Habitats.find({user: "undefined"});
+            return Habitats.find({user: "default"});
         }
     },
     'settings_view_is_change': function () {

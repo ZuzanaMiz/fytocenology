@@ -5,7 +5,9 @@ export const plantsInsert = new ValidatedMethod({
         degree: {type: Number},
         vitality: {type: Number},
         sociability: {type: Number},
-        reportId: {type: String, regEx: SimpleSchema.RegEx.Id}
+        reportId: {type: String, regEx: SimpleSchema.RegEx.Id},
+        vegetation_degree: {type: String}
+
     }).validator(),
     applyOptions: {
         clean: true,
@@ -98,7 +100,7 @@ Meteor.methods({
             cover: cover,
             date: date,
             areaId: areaId,
-            closed: 'false',
+            closed: false,
             userId: Meteor.userId()
 
         });

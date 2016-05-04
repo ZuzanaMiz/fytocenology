@@ -1,12 +1,21 @@
 Template.area_list.helpers({
     areas: function () {
+        if (Meteor.status().status !== "connected") {
+            var savedAreas = SavedAreas.find({user: Meteor.userId()});
+            var savedAreasName = [];
+            savedAreas.forEach(function (sa) {
+                savedAreasName.push(sa.area);
+            });
 
-        if (Session.get('onlyMy') == true) {
+            return Areas.find({_id: {$in: savedAreasName}});
+        } else {
+            if (Session.get('onlyMy') == true) {
 
-            return Areas.find({user: Meteor.userId()});
-        }
-        else {
-            return Areas.find();
+                return Areas.find({user: Meteor.userId()});
+            }
+            else {
+                return Areas.find();
+            }
         }
 
     },
@@ -16,6 +25,12 @@ Template.area_list.helpers({
     generatorMode: function () {
         return Session.get("generatorMode") === true;
     },
+    isConnected: function () {
+        if (Meteor.status().status === "connected") {
+            return "checkbox";
+        }
+        return "hidden";
+    }
 
 
 });
@@ -106,9 +121,11 @@ Template.area_list.events({
             output_exp.value = result_EXP;
             //}
         }
+    },
+
+    'click .search': function () {
+
     }
-
-
 });
 Template.area.onCreated(function () {
     if (this.gps1 !== undefined && this.gps1.typeof(Object)) {
@@ -140,8 +157,9 @@ Template.area.helpers({
             return "ja";
         }
         else {
-            return this.user;
-    }
+            console.log(UserData.find());
+            //return UserData.findOne({_id: this.user}).emails.address;
+        }
     }
 });
 Template.area.events({

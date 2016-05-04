@@ -55,8 +55,27 @@
         </div>
 
         <div class="row">
-            <div class="map-container">
-                {{> googleMap name="map" options=mapOptions}}
+            <div class="col-lg-8">
+                <div class="panel panel-primary">
+
+                    <div class="map-container">
+
+                        {{> googleMap name="map" options=mapOptions}}
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Vysvetlivky k mape</div>
+                    <div class="panel-body" style="background: #000000;">
+                        <p style="color:#0033FF">vodny biotop</p>
+                        <p style="color:#FFFF00">biotop luky</p>
+                        <p style="color:#006600">biotop lesa</p>
+                    </div>
+                </div>
             </div>
         </div>
         {{/if}}

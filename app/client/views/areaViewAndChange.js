@@ -74,5 +74,10 @@ Template.infoArea.helpers({
     },
     habitat_name: function () {
         return Habitats.findOne({_id: this.habitat}).name;
+    },
+    degrees_name: function () {
+        var exp = Areas.findOne({_id: this._id}).exposure;
+        return Cardinals.findOne({degree: parseInt(exp)}).name;
     }
+
 });

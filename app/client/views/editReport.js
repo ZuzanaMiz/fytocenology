@@ -100,7 +100,8 @@ Template.tablePlants.events({
             degree: parseInt(event.target.degree.value),
             vitality: parseInt(event.target.vitality.value),
             sociability: parseInt(event.target.sociability.value),
-            reportId: Session.get("report")
+            reportId: Session.get("report"),
+            vegetation_degree: event.target.vegetation_degree.value
         };
 
         Meteor.call('Plants.insert', plant);

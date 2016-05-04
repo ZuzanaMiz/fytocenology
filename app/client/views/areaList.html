@@ -37,9 +37,9 @@
                                 </button>
                             {{/if}}
                         </form>
-                        s
+
                         <label class="onlyMy">
-                            <input type="checkbox" checked="{{onlyMyActual}}">
+                            <input type= {{isConnected}}  checked="{{onlyMyActual}}">
                             Moje oblasti
                         </label>
                         <div class="table-responsive">
@@ -99,10 +99,10 @@
     <div class="panel-body green">
         <h2>{{areaPlace}}</h2>
         <p>{{areaDescription}} <br>
-            <label>Súradnica 1:</label> {{gps1.latitude}},  {{gps1.longitude}}<br>
-            <label>Súradnica 2 : </label> {{gps2.latitude}},  {{gps2.longitude}}<br>
-            <label>Nadmorská výška:</label>{{areaHigh}}<br>
-            <label>Expozícia:</label>{{areaExposure}}<br>
+            <label>Súradnica 1: </label> {{gps1Lat}},  {{gps1Long}}<br>
+            <label>Súradnica 2: </label> {{gps2Lat}},  {{gps2Long}}<br>
+            <label>Nadmorská výška: </label>{{areaHigh}}<br>
+            <label>Expozícia: </label>{{areaExposure}}<br>
         </p>
     </div>
 </template>
